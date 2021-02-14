@@ -13,6 +13,8 @@
 		DC4E913725D8CFF600B6EB85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913525D8CFF600B6EB85 /* Main.storyboard */; };
 		DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913825D8CFF800B6EB85 /* Assets.xcassets */; };
 		DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */; };
+		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
+		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		DC4E913825D8CFF800B6EB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC4E913B25D8CFF800B6EB85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC4E913D25D8CFF800B6EB85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = "Supporting Files/MainTabBarController.swift"; sourceTree = "<group>"; };
+		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +60,12 @@
 		DC4E912E25D8CFF600B6EB85 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				DC70CE0825D9084400F2C169 /* MainTabBarController.swift */,
+				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
 				DC4E913525D8CFF600B6EB85 /* Main.storyboard */,
 				DC4E913325D8CFF600B6EB85 /* ViewController.swift */,
-				DC4E913D25D8CFF800B6EB85 /* Info.plist */,
 				DC4E914325D8F92300B6EB85 /* Supporting Files */,
+				DC4E913D25D8CFF800B6EB85 /* Info.plist */,
 			);
 			path = Podcast;
 			sourceTree = "<group>";
@@ -147,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
+				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
 				DC4E913025D8CFF600B6EB85 /* AppDelegate.swift in Sources */,
+				DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */,
 				DC4E913225D8CFF600B6EB85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
