@@ -15,8 +15,6 @@ class MainTabBarController: UITabBarController {
     
     setupBarAppearance()
     setupChileVCs()
-    
-    
   }
   
   private func setupBarAppearance() {
