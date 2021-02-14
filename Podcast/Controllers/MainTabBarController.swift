@@ -15,6 +15,8 @@ class MainTabBarController: UITabBarController {
     
     setupBarAppearance()
     setupChileVCs()
+    
+    
   }
   
   private func setupBarAppearance() {
@@ -23,12 +25,12 @@ class MainTabBarController: UITabBarController {
   
   private func setupChileVCs() {
     let favorites = ViewController()
-    let search = ViewController()
+    let search = PodcastSearchController()
     let downloads = ViewController()
     
     viewControllers = [
-      favorites.wrapInNav(tabBarTitle: "Favourites", tabBarImage: #imageLiteral(resourceName: "favorites")),
       search.wrapInNav(tabBarTitle: "Search", tabBarImage: #imageLiteral(resourceName: "search")),
+      favorites.wrapInNav(tabBarTitle: "Favourites", tabBarImage: #imageLiteral(resourceName: "favorites")),
       downloads.wrapInNav(tabBarTitle: "Downloads", tabBarImage: #imageLiteral(resourceName: "downloads"))
     ]
   }

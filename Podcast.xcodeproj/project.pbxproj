@@ -15,6 +15,8 @@
 		DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */; };
 		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
+		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
+		DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE1125D9230600F2C169 /* Podcast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		DC4E913825D8CFF800B6EB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC4E913B25D8CFF800B6EB85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC4E913D25D8CFF800B6EB85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = "Supporting Files/MainTabBarController.swift"; sourceTree = "<group>"; };
+		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
+		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
+		DC70CE1125D9230600F2C169 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +64,11 @@
 		DC4E912E25D8CFF600B6EB85 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
-				DC70CE0825D9084400F2C169 /* MainTabBarController.swift */,
-				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
+				DC70CE1025D922F900F2C169 /* Model */,
 				DC4E913525D8CFF600B6EB85 /* Main.storyboard */,
 				DC4E913325D8CFF600B6EB85 /* ViewController.swift */,
+				DC70CE0F25D922D100F2C169 /* Controllers */,
+				DC70CE0E25D922BE00F2C169 /* Extensions */,
 				DC4E914325D8F92300B6EB85 /* Supporting Files */,
 				DC4E913D25D8CFF800B6EB85 /* Info.plist */,
 			);
@@ -79,6 +84,31 @@
 				DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC70CE0E25D922BE00F2C169 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DC70CE0F25D922D100F2C169 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DC70CE0825D9084400F2C169 /* MainTabBarController.swift */,
+				DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DC70CE1025D922F900F2C169 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC70CE1125D9230600F2C169 /* Podcast.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
+				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
 				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
 				DC4E913025D8CFF600B6EB85 /* AppDelegate.swift in Sources */,
