@@ -68,3 +68,20 @@ extension PodcastSearchController: UISearchBarDelegate {
     }
   }
 }
+
+extension PodcastSearchController {
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let label = UILabel()
+    
+    label.text = "No results. Please enter a search query"
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    
+    return label
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return podcasts.count == 0 ? 250 : 0
+  }
+}
