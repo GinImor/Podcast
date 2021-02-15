@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PodcastCell: UITableViewCell {
   
@@ -26,19 +27,7 @@ class PodcastCell: UITableViewCell {
       guard let artworkUrlString = podcast.artworkUrl,
       let artworkUrl = URL(string: artworkUrlString) else { return }
       
-      URLSession.shared.dataTask(with: artworkUrl) { (data, response, error) in
-        if let error = error {
-          print(error)
-        }
-        
-        guard let httpUrlResponse = response as? HTTPURLResponse, (200...209).contains(httpUrlResponse.statusCode) else { return }
-        
-        guard let data = data, let image = UIImage(data: data) else { return }
-        
-        DispatchQueue.main.async {
-          self.podcastImageView.image = image
-        }
-      }.resume()
+      podcastImageView.sd_setImage(with: artworkUrl, completed: nil)
     }
   }
   
