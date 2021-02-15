@@ -10,7 +10,8 @@ import UIKit
 import Alamofire
 
 enum CellID {
-  static let podcast = "podcast cell"
+  static let podcast = "PodcastCell"
+  static let podcastNib = "PodcastCell"
 }
 
 class PodcastSearchController: UITableViewController {
@@ -39,7 +40,11 @@ class PodcastSearchController: UITableViewController {
   
   private func setupTableView() {
     tableView.tableFooterView = UIView()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellID.podcast)
+    tableView.estimatedRowHeight = 116
+    tableView.rowHeight = UITableView.automaticDimension
+    
+    let podcastCellNib = UINib(nibName: CellID.podcastNib, bundle: nil)
+    tableView.register(podcastCellNib, forCellReuseIdentifier: CellID.podcast)
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,12 +52,10 @@ class PodcastSearchController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.podcast, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.podcast, for: indexPath) as! PodcastCell
     let podcast = podcasts[indexPath.row]
     
-    cell.imageView?.image = #imageLiteral(resourceName: "appicon")
-    cell.textLabel?.numberOfLines = -1
-    cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
+    cell.podcast = podcast
     
     return cell
   }
