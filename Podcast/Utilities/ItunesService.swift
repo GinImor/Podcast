@@ -11,10 +11,10 @@ import Alamofire
 
 class ItunesService {
   
+  static let shared = ItunesService()
+  
   private let baseItunesSearchUrl = "https://itunes.apple.com/search"
   private var lastSearchText = ""
-  
-  static let shared = ItunesService()
   
   func fetchPodcasts(searchText: String, completion: @escaping ([Podcast]) -> Void) {
     let parameters = ["term": searchText, "media": "podcast"]

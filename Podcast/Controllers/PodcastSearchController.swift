@@ -12,6 +12,7 @@ import Alamofire
 enum CellID {
   static let podcast = "PodcastCell"
   static let podcastNib = "PodcastCell"
+  static let episode = "EpisodeCell"
 }
 
 class PodcastSearchController: UITableViewController {
@@ -69,6 +70,9 @@ extension PodcastSearchController: UISearchBarDelegate {
   }
 }
 
+
+// MARK: - Table View Delegate
+
 extension PodcastSearchController {
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -83,5 +87,12 @@ extension PodcastSearchController {
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return podcasts.count == 0 ? 250 : 0
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let episodesController = EpisodesController()
+    
+    episodesController.podcast = podcasts[indexPath.row]
+    navigationController?.pushViewController(episodesController, animated: true)
   }
 }
