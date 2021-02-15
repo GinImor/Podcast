@@ -62,18 +62,9 @@ class PodcastSearchController: UITableViewController {
 extension PodcastSearchController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    let baseUrl = "https://itunes.apple.com/search"
-    let parameters = ["term": searchText, "media": "podcast"]
-    
-    AF.request(baseUrl, parameters: parameters, encoding: URLEncoding.default).responseDecodable(of: PodcastSearchResults.self) { (dataResponse) in
-      switch dataResponse.result {
-      case .success(let podcastSearchResults):
-        self.podcasts = podcastSearchResults.results
-        self.tableView.reloadData()
-        
-      case .failure(let afError):
-        print("error", afError)
-      }
+    ItunesService.shared.fetchPodcasts(searchText: searchText) { podcasts in
+      self.podcasts = podcasts
+      self.tableView.reloadData()
     }
   }
 }

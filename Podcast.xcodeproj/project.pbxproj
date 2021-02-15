@@ -19,6 +19,7 @@
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
 		DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE1125D9230600F2C169 /* Podcast.swift */; };
 		DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */; };
+		DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
 		DC70CE1125D9230600F2C169 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearchResults.swift; sourceTree = "<group>"; };
+		DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		DC4E912E25D8CFF600B6EB85 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				DCDCF1C525DA7AC8007D7BFC /* Utilities */,
 				DC70CE1025D922F900F2C169 /* Model */,
 				DC4E913525D8CFF600B6EB85 /* Main.storyboard */,
 				DC4E913325D8CFF600B6EB85 /* ViewController.swift */,
@@ -136,6 +139,14 @@
 				DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DCDCF1C525DA7AC8007D7BFC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
