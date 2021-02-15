@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
 		DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE1125D9230600F2C169 /* Podcast.swift */; };
+		DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
 		DC70CE1125D9230600F2C169 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearchResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,6 @@
 				1B8C5EB88D7FBB12C1CAC6DA /* Pods-Podcast.debug.xcconfig */,
 				5BAFA3AAC8448A26015DAB94 /* Pods-Podcast.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -132,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				DC70CE1125D9230600F2C169 /* Podcast.swift */,
+				DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +256,7 @@
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
+				DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */,
 				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
 				DC4E913025D8CFF600B6EB85 /* AppDelegate.swift in Sources */,
 				DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */,

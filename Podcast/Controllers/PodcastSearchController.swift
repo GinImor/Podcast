@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 enum CellID {
   static let podcast = "podcast cell"
@@ -15,8 +16,8 @@ enum CellID {
 class PodcastSearchController: UITableViewController {
   
   var podcasts: [Podcast] = [
-    Podcast(name: "ab", authorName: "Gin"),
-    Podcast(name: "cd", authorName: "Brevity"),
+    Podcast(trackName: "ab", artistName: "Gin"),
+    Podcast(trackName: "cd", artistName: "Brevity"),
   ]
   
   override func viewDidLoad() {
@@ -51,7 +52,7 @@ class PodcastSearchController: UITableViewController {
     
     cell.imageView?.image = #imageLiteral(resourceName: "appicon")
     cell.textLabel?.numberOfLines = -1
-    cell.textLabel?.text = "\(podcast.name)\n\(podcast.authorName)"
+    cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
     
     return cell
   }
@@ -61,6 +62,18 @@ class PodcastSearchController: UITableViewController {
 extension PodcastSearchController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    print(searchText)
+    let baseUrl = "https://itunes.apple.com/search"
+    let parameters = ["term": searchText, "media": "podcast"]
+    
+    AF.request(baseUrl, parameters: parameters, encoding: URLEncoding.default).responseDecodable(of: PodcastSearchResults.self) { (dataResponse) in
+      switch dataResponse.result {
+      case .success(let podcastSearchResults):
+        self.podcasts = podcastSearchResults.results
+        self.tableView.reloadData()
+        
+      case .failure(let afError):
+        print("error", afError)
+      }
+    }
   }
 }

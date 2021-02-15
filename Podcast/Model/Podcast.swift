@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Podcast {
-  let name: String
-  let authorName: String
+struct Podcast: Decodable {
+  let trackName: String?
+  let artistName: String?
 }
