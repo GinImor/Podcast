@@ -16,10 +16,7 @@ enum CellID {
 
 class PodcastSearchController: UITableViewController {
   
-  var podcasts: [Podcast] = [
-    Podcast(trackName: "ab", artistName: "Gin"),
-    Podcast(trackName: "cd", artistName: "Brevity"),
-  ]
+  var podcasts: [Podcast] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
