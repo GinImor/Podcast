@@ -80,6 +80,7 @@ extension PodcastSearchController {
     
     label.text = "No results. Please enter a search query"
     label.textAlignment = .center
+    label.textColor = .primaryColor
     label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     
     return label

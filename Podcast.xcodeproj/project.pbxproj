@@ -24,6 +24,7 @@
 		DCDCF1CC25DA8A2A007D7BFC /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CB25DA8A2A007D7BFC /* PodcastCell.swift */; };
 		DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */; };
 		DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CF25DABFEA007D7BFC /* Episode.swift */; };
+		DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		DCDCF1CB25DA8A2A007D7BFC /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
 		DCDCF1CF25DABFEA007D7BFC /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+predefinedColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
+				DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DCDCF1CC25DA8A2A007D7BFC /* PodcastCell.swift in Sources */,
+				DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,

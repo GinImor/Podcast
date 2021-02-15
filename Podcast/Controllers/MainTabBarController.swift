@@ -18,7 +18,7 @@ class MainTabBarController: UITabBarController {
   }
   
   private func setupBarAppearance() {
-    tabBar.tintColor = .purple
+    tabBar.tintColor = .primaryColor
   }
   
   private func setupChileVCs() {
