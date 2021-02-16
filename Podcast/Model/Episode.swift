@@ -9,5 +9,5 @@
 import Foundation
 
 struct Episode {
-  let title: String
+  let title: String?
 }
