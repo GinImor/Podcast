@@ -13,6 +13,7 @@ enum CellID {
   static let podcast = "PodcastCell"
   static let podcastNib = "PodcastCell"
   static let episode = "EpisodeCell"
+  static let episodeNib = "EpisodeCell"
 }
 
 class PodcastSearchController: UITableViewController {

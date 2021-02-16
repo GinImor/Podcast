@@ -48,7 +48,7 @@ class EpisodesController: UITableViewController {
           guard let rssFeed = feed.rssFeed else { return }
           
           DispatchQueue.main.async {
-            self.episodes = rssFeed.items?.map{ Episode(title: $0.title )} ?? []
+            self.episodes = rssFeed.items?.map{ Episode(rssFeedItem: $0) } ?? []
             self.tableView.reloadData()
             self.finishedLoading = true
             self.activityIndicator.stopAnimating()
@@ -77,7 +77,11 @@ class EpisodesController: UITableViewController {
   
   private func setupTableView() {
     tableView.tableFooterView = UIView()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellID.episode)
+    tableView.estimatedRowHeight = 116
+    tableView.rowHeight = UITableView.automaticDimension
+    
+    let cellNib = UINib(nibName: CellID.episodeNib, bundle: nil)
+    tableView.register(cellNib, forCellReuseIdentifier: CellID.episode)
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,10 +89,10 @@ class EpisodesController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.episode, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.episode, for: indexPath) as! EpisodeCell
     let episode = episodes[indexPath.row]
     
-    cell.textLabel?.text = episode.title
+    cell.episode = episode
     
     return cell
   }

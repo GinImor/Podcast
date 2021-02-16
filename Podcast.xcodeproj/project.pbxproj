@@ -18,6 +18,9 @@
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
 		DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE1125D9230600F2C169 /* Podcast.swift */; };
+		DCBA719B25DBFD82004E081C /* DateFormatter+customInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */; };
+		DCBA719E25DBFDC0004E081C /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBA719C25DBFDC0004E081C /* EpisodeCell.swift */; };
+		DCBA719F25DBFDC0004E081C /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCBA719D25DBFDC0004E081C /* EpisodeCell.xib */; };
 		DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */; };
 		DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */; };
 		DCDCF1CA25DA8850007D7BFC /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCDCF1C925DA8850007D7BFC /* PodcastCell.xib */; };
@@ -43,6 +46,9 @@
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
 		DC70CE1125D9230600F2C169 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+customInstance.swift"; sourceTree = "<group>"; };
+		DCBA719C25DBFDC0004E081C /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		DCBA719D25DBFDC0004E081C /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
 		DCDCF1C325DA59C5007D7BFC /* PodcastSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearchResults.swift; sourceTree = "<group>"; };
 		DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesService.swift; sourceTree = "<group>"; };
 		DCDCF1C925DA8850007D7BFC /* PodcastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastCell.xib; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 		DC70CE0E25D922BE00F2C169 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */,
 				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
 				DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */,
 			);
@@ -168,6 +175,8 @@
 			children = (
 				DCDCF1C925DA8850007D7BFC /* PodcastCell.xib */,
 				DCDCF1CB25DA8A2A007D7BFC /* PodcastCell.swift */,
+				DCBA719C25DBFDC0004E081C /* EpisodeCell.swift */,
+				DCBA719D25DBFDC0004E081C /* EpisodeCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */,
+				DCBA719F25DBFDC0004E081C /* EpisodeCell.xib in Resources */,
 				DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */,
 				DCDCF1CA25DA8850007D7BFC /* PodcastCell.xib in Resources */,
 				DC4E913725D8CFF600B6EB85 /* Main.storyboard in Resources */,
@@ -288,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCBA719B25DBFD82004E081C /* DateFormatter+customInstance.swift in Sources */,
 				DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */,
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
@@ -298,6 +309,7 @@
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
 				DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */,
 				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
+				DCBA719E25DBFDC0004E081C /* EpisodeCell.swift in Sources */,
 				DC4E913025D8CFF600B6EB85 /* AppDelegate.swift in Sources */,
 				DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */,
 				DC4E913225D8CFF600B6EB85 /* SceneDelegate.swift in Sources */,
