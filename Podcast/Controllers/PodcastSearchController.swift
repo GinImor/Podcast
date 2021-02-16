@@ -28,10 +28,17 @@ class PodcastSearchController: UITableViewController {
   
   private func setupSearchbar() {
     let searchController = UISearchController(searchResultsController: nil)
+    let searchBarTextField = searchController.searchBar.searchTextField
     
     navigationItem.hidesSearchBarWhenScrolling = false
+    
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.delegate = self
+    
+    searchBarTextField.layer.borderColor = UIColor.primaryColor.cgColor
+    searchBarTextField.layer.borderWidth = 2.0
+    searchBarTextField.layer.cornerRadius = 10.0
+    searchBarTextField.layer.masksToBounds = true
     
     navigationItem.searchController = searchController
   }

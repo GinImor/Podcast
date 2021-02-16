@@ -11,7 +11,7 @@ import UIKit
 class EpisodesController: UITableViewController {
   
   var podcast: Podcast?
-  var episodes: [Episode] = []
+  var episodes: [Episode] = [Episode(title: "abcdkljsf"), Episode(title: "lfjalfjlkdfj")]
   
   override func viewDidLoad() {
     super.viewDidLoad()
