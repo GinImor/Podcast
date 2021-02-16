@@ -9,5 +9,5 @@
 import UIKit
 
 extension UIColor {
-  static let primaryColor = UIColor.purple
+  static let primaryColor = UIColor.orange
 }
