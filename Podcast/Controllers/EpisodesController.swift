@@ -48,7 +48,8 @@ class EpisodesController: UITableViewController {
           guard let rssFeed = feed.rssFeed else { return }
           
           DispatchQueue.main.async {
-            self.episodes = rssFeed.items?.map{ Episode(rssFeedItem: $0) } ?? []
+            let altImageUrl = self.podcast?.artworkUrl ?? ""
+            self.episodes = rssFeed.items?.map{ Episode(rssFeedItem: $0, altImageUrl: altImageUrl) } ?? []
             self.tableView.reloadData()
             self.finishedLoading = true
             self.activityIndicator.stopAnimating()

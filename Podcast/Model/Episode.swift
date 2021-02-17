@@ -13,10 +13,12 @@ struct Episode {
   let title: String
   let pubDate: Date
   let description: String
+  let imageUrl: String
   
-  init(rssFeedItem: RSSFeedItem) {
+  init(rssFeedItem: RSSFeedItem, altImageUrl: String) {
     title = rssFeedItem.title ?? ""
     pubDate = rssFeedItem.pubDate ?? Date()
     description = rssFeedItem.description ?? ""
+    imageUrl = rssFeedItem.iTunes?.iTunesImage?.attributes?.href ?? altImageUrl
   }
 }

@@ -22,6 +22,7 @@ class EpisodeCell: UITableViewCell {
       pubDateLabel.text = DateFormatter.m3D2Y4.string(from: episode.pubDate)
       titleLabel.text = episode.title
       descriptionLabel.text = episode.description
+      episodeImageView.sd_setImage(with: URL(string: episode.imageUrl.toHttps()))
     }
   }
 }
