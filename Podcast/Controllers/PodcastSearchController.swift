@@ -27,6 +27,14 @@ class PodcastSearchController: UITableViewController {
     setupTableView()
   }
   
+  // MARK: - For Testing
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    searchBar(navigationItem.searchController!.searchBar, textDidChange: "Swift")
+  }
+  
+  
   private func setupSearchbar() {
     let searchController = UISearchController(searchResultsController: nil)
     let searchBarTextField = searchController.searchBar.searchTextField
