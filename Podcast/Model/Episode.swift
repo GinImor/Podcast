@@ -15,6 +15,7 @@ struct Episode {
   let description: String?
   let author: String?
   let imageUrl: String
+  let audioUrl: String
   
   init(rssFeedItem: RSSFeedItem, altImageUrl: String) {
     title = rssFeedItem.title
@@ -22,5 +23,6 @@ struct Episode {
     description = rssFeedItem.description
     author = rssFeedItem.iTunes?.iTunesAuthor
     imageUrl = rssFeedItem.iTunes?.iTunesImage?.attributes?.href ?? altImageUrl
+    audioUrl = rssFeedItem.enclosure?.attributes?.url ?? ""
   }
 }
