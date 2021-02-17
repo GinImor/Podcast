@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="BjK-ST-6iY">
-                    <rect key="frame" x="16" y="8" width="343" height="643"/>
+                    <rect key="frame" x="16" y="8" width="343" height="635"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JW-kB-XpU">
                             <rect key="frame" x="143.5" y="0.0" width="56" height="30"/>
@@ -34,7 +34,7 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZR2-K6-muQ">
-                            <rect key="frame" x="0.0" y="384.5" width="343" height="258.5"/>
+                            <rect key="frame" x="0.0" y="384.5" width="343" height="250.5"/>
                             <subviews>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-zT-Daa">
                                     <rect key="frame" x="-2" y="0.0" width="347" height="31"/>
@@ -69,61 +69,83 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-gw-6xn">
-                                    <rect key="frame" x="0.0" y="123.5" width="343" height="50"/>
+                                    <rect key="frame" x="0.0" y="123.5" width="343" height="89"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mml-cj-9zK">
-                                            <rect key="frame" x="0.0" y="0.0" width="3.5" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="3.5" height="89"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="20" image="gobackward.15" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mue-gq-O7h">
-                                            <rect key="frame" x="38.5" y="-1.5" width="34" height="51"/>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mys-K9-uLN">
+                                            <rect key="frame" x="43.5" y="0.0" width="26" height="89"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </imageView>
+                                            <state key="normal" image="gobackward.15" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                </preferredSymbolConfiguration>
+                                            </state>
+                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fy-Kh-VF0">
-                                            <rect key="frame" x="107.5" y="0.0" width="3.5" height="50"/>
+                                            <rect key="frame" x="109.5" y="0.0" width="3.5" height="89"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="20" image="play" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iNt-fb-suT">
-                                            <rect key="frame" x="146" y="1.5" width="51" height="46.5"/>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpb-kg-59P">
+                                            <rect key="frame" x="153" y="0.0" width="37" height="89"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </imageView>
+                                            <state key="normal" image="play" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                </preferredSymbolConfiguration>
+                                            </state>
+                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fyp-hs-hLE">
-                                            <rect key="frame" x="232" y="0.0" width="3.5" height="50"/>
+                                            <rect key="frame" x="230" y="0.0" width="3.5" height="89"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="20" image="goforward.15" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3eg-QE-8J7">
-                                            <rect key="frame" x="270.5" y="-1.5" width="34" height="51"/>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrn-Rt-ZSG">
+                                            <rect key="frame" x="273.5" y="0.0" width="26" height="89"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </imageView>
+                                            <state key="normal" image="goforward.15" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                </preferredSymbolConfiguration>
+                                            </state>
+                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQd-2f-v8a">
-                                            <rect key="frame" x="339.5" y="0.0" width="3.5" height="50"/>
+                                            <rect key="frame" x="339.5" y="0.0" width="3.5" height="89"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="3Fy-Kh-VF0" firstAttribute="width" secondItem="Mml-cj-9zK" secondAttribute="width" id="D1H-eT-f2s"/>
-                                        <constraint firstItem="iNt-fb-suT" firstAttribute="width" secondItem="eWw-gw-6xn" secondAttribute="width" multiplier="0.15" id="JwJ-2j-nvD"/>
                                         <constraint firstItem="qQd-2f-v8a" firstAttribute="width" secondItem="Mml-cj-9zK" secondAttribute="width" id="LcP-Zi-kvg"/>
-                                        <constraint firstItem="mue-gq-O7h" firstAttribute="width" secondItem="eWw-gw-6xn" secondAttribute="width" multiplier="0.1" id="QLx-jy-6RC"/>
                                         <constraint firstItem="Mml-cj-9zK" firstAttribute="width" secondItem="eWw-gw-6xn" secondAttribute="width" multiplier="0.01" id="RbJ-kY-AvM"/>
                                         <constraint firstItem="Fyp-hs-hLE" firstAttribute="width" secondItem="Mml-cj-9zK" secondAttribute="width" id="afK-Fg-G8Y"/>
-                                        <constraint firstItem="3eg-QE-8J7" firstAttribute="width" secondItem="mue-gq-O7h" secondAttribute="width" id="xrd-Rz-Ixe"/>
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WkE-x6-IyI">
-                                    <rect key="frame" x="0.0" y="181.5" width="343" height="77"/>
+                                    <rect key="frame" x="0.0" y="220.5" width="343" height="30"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9uK-CV-sGm">
-                                            <rect key="frame" x="0.0" y="29.5" width="0.0" height="17.5"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-GC-Xlg">
+                                            <rect key="frame" x="0.0" y="4" width="0.0" height="22"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </imageView>
-                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
-                                            <rect key="frame" x="6" y="23.5" width="331" height="31"/>
+                                            <state key="normal" image="speaker" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                </preferredSymbolConfiguration>
+                                            </state>
+                                        </button>
+                                        <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
+                                            <rect key="frame" x="6" y="0.0" width="331" height="31"/>
                                         </slider>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker.3" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kaN-Dk-w2a">
-                                            <rect key="frame" x="343" y="29" width="0.0" height="19"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-aP-vaP">
+                                            <rect key="frame" x="343" y="4" width="0.0" height="22"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </imageView>
+                                            <state key="normal" image="speaker.3" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                </preferredSymbolConfiguration>
+                                            </state>
+                                        </button>
                                     </subviews>
                                 </stackView>
                             </subviews>
@@ -138,7 +160,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="jsl-CN-MTt" firstAttribute="bottom" secondItem="BjK-ST-6iY" secondAttribute="bottom" constant="16" id="611-ZN-3Oh"/>
+                <constraint firstItem="jsl-CN-MTt" firstAttribute="bottom" secondItem="BjK-ST-6iY" secondAttribute="bottom" constant="24" id="611-ZN-3Oh"/>
                 <constraint firstItem="BjK-ST-6iY" firstAttribute="top" secondItem="jsl-CN-MTt" secondAttribute="top" constant="8" id="9LA-Hm-Fc0"/>
                 <constraint firstItem="BjK-ST-6iY" firstAttribute="leading" secondItem="GQq-kM-FRy" secondAttribute="leading" constant="16" id="aD2-IT-PE0"/>
                 <constraint firstAttribute="trailing" secondItem="BjK-ST-6iY" secondAttribute="trailing" constant="16" id="fYs-MH-8XR"/>
