@@ -10,15 +10,17 @@ import Foundation
 import FeedKit
 
 struct Episode {
-  let title: String
+  let title: String?
   let pubDate: Date
-  let description: String
+  let description: String?
+  let author: String?
   let imageUrl: String
   
   init(rssFeedItem: RSSFeedItem, altImageUrl: String) {
-    title = rssFeedItem.title ?? ""
+    title = rssFeedItem.title
     pubDate = rssFeedItem.pubDate ?? Date()
-    description = rssFeedItem.description ?? ""
+    description = rssFeedItem.description
+    author = rssFeedItem.iTunes?.iTunesAuthor
     imageUrl = rssFeedItem.iTunes?.iTunesImage?.attributes?.href ?? altImageUrl
   }
 }
