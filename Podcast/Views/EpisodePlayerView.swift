@@ -23,6 +23,8 @@ class EpisodePlayerView: UIView {
       authorLabel.text = episode.author
       
       episodeImageView.sd_setImage(with: URL(string: episode.imageUrl))
+      episodeImageView.layer.cornerRadius = episodeImageView.bounds.width * 0.05
+      episodeImageView.layer.masksToBounds = true
     }
   }
   
