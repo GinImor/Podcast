@@ -38,26 +38,12 @@ class EpisodesController: UITableViewController {
   }
   
   private func loadEpisodes() {
-    guard let feedUrlString = podcast?.feedUrl, let feedUrl = URL(string: feedUrlString) else { return }
-      
-      let feedParser = FeedParser(URL: feedUrl)
-      
-      feedParser.parseAsync(queue: .global(qos: .userInitiated)) { (result) in
-        switch result {
-        case .success(let feed):
-          guard let rssFeed = feed.rssFeed else { return }
-          
-          DispatchQueue.main.async {
-            let altImageUrl = self.podcast?.artworkUrl ?? ""
-            self.episodes = rssFeed.items?.map{ Episode(rssFeedItem: $0, altImageUrl: altImageUrl) } ?? []
-            self.tableView.reloadData()
-            self.finishedLoading = true
-            self.activityIndicator.stopAnimating()
-          }
-        case .failure(let parserError):
-          print("parser error", parserError)
-        }
-      }
+    ItunesService.shared.fetchEpisodes(podcast: podcast) { (episodes) in
+      self.episodes = episodes
+      self.tableView.reloadData()
+      self.finishedLoading = true
+      self.activityIndicator.stopAnimating()
+    }
   }
   
   private func setupActivityIndicator() {
