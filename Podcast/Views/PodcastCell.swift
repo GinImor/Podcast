@@ -24,7 +24,7 @@ class PodcastCell: UITableViewCell {
       let trackCount = podcast.trackCount ?? 0
       episodeCountLabel.text = "\(trackCount) episode\(trackCount > 1 ? "s" : "")"
       
-      guard let artworkUrlString = podcast.artworkUrl,
+      guard let artworkUrlString = podcast.artworkUrl?.toHttps(),
       let artworkUrl = URL(string: artworkUrlString) else { return }
       
       podcastImageView.sd_setImage(with: artworkUrl, completed: nil)
