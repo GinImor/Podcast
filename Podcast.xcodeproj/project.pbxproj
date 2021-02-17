@@ -29,6 +29,8 @@
 		DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */; };
 		DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CF25DABFEA007D7BFC /* Episode.swift */; };
 		DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */; };
+		DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */; };
+		DCECAA9825DCB559000AD716 /* EpisodePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
 		DCDCF1CF25DABFEA007D7BFC /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+predefinedColor.swift"; sourceTree = "<group>"; };
+		DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
+		DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodePlayerView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 				DCDCF1CB25DA8A2A007D7BFC /* PodcastCell.swift */,
 				DCBA719C25DBFDC0004E081C /* EpisodeCell.swift */,
 				DCBA719D25DBFDC0004E081C /* EpisodeCell.xib */,
+				DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */,
+				DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */,
+				DCECAA9825DCB559000AD716 /* EpisodePlayerView.xib in Resources */,
 				DCBA719F25DBFDC0004E081C /* EpisodeCell.xib in Resources */,
 				DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */,
 				DCDCF1CA25DA8850007D7BFC /* PodcastCell.xib in Resources */,
@@ -311,6 +318,7 @@
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
+				DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */,
 				DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */,
 				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
 				DCBA719E25DBFDC0004E081C /* EpisodeCell.swift in Sources */,

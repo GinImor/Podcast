@@ -83,4 +83,13 @@ class EpisodesController: UITableViewController {
     
     return cell
   }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let episodePlayerView = Bundle.main.loadNibNamed("EpisodePlayerView", owner: self, options: nil)?.first as! EpisodePlayerView
+    let episode = episodes[indexPath.row]
+    
+    episodePlayerView.frame = view.frame
+    episodePlayerView.episode = episode
+    view.window?.addSubview(episodePlayerView)
+  }
 }
