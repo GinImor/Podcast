@@ -32,6 +32,7 @@
 		DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */; };
 		DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */; };
 		DCECAA9825DCB559000AD716 /* EpisodePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */; };
+		DCF0417725DE7F4A00AB8E50 /* UIView+tAMIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+predefinedColor.swift"; sourceTree = "<group>"; };
 		DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
 		DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodePlayerView.xib; sourceTree = "<group>"; };
+		DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+tAMIC.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		DC70CE0E25D922BE00F2C169 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */,
 				DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */,
 				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
 				DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */,
@@ -317,6 +320,7 @@
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DCDCF1CC25DA8A2A007D7BFC /* PodcastCell.swift in Sources */,
+				DCF0417725DE7F4A00AB8E50 /* UIView+tAMIC.swift in Sources */,
 				DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */,
 				DC7B420325DD68440014684F /* CMTime+utility.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,

@@ -10,11 +10,16 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
   
+  let episodePlayerView = EpisodePlayerView.shared
+  var playerViewTopToSuperViewTopConstraint: NSLayoutConstraint!
+  var playerViewTopToTabBarTopConstraint: NSLayoutConstraint!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupBarAppearance()
     setupChileVCs()
+    setupPlayerView()
   }
   
   private func setupBarAppearance() {
@@ -32,4 +37,75 @@ class MainTabBarController: UITabBarController {
       downloads.wrapInNav(tabBarTitle: "Downloads", tabBarImage: #imageLiteral(resourceName: "downloads"))
     ]
   }
+  
+  private func setupPlayerView() {
+    view.insertSubview(episodePlayerView, belowSubview: tabBar)
+    
+    episodePlayerView.disableTAMIC()
+    
+    playerViewTopToSuperViewTopConstraint =
+      episodePlayerView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height)
+    playerViewTopToTabBarTopConstraint =
+      tabBar.topAnchor.constraint(equalTo: episodePlayerView.topAnchor, constant: 64)
+    
+    NSLayoutConstraint.activate([
+      playerViewTopToSuperViewTopConstraint,
+      episodePlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      view.trailingAnchor.constraint(equalTo: episodePlayerView.trailingAnchor),
+      episodePlayerView.heightAnchor.constraint(equalToConstant: view.bounds.height)
+    ])
+    
+    episodePlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))
+    
+    episodePlayerView.willDismiss = { [unowned self] in
+      self.narrowPlayerViewAboveTabBar()
+    }
+    episodePlayerView.willPopulateWithEpisode = { [unowned self] (episode) in
+      self.episodePlayerView.episode = episode
+      self.expandPlayerViewToTop()
+    }
+  }
+  
+  @objc func expandPlayerViewToTop() {
+    episodePlayerView.addBoundaryTimeObserver()
+    episodePlayerView.addPeriodicTimeObserver()
+    
+    episodePlayerView.gestureRecognizers?.first?.isEnabled = false
+    playerViewTopToTabBarTopConstraint.isActive = false
+    playerViewTopToSuperViewTopConstraint.isActive = true
+    playerViewTopToSuperViewTopConstraint.constant = 0
+    animatePlayerViewLayoutChange(expanding: true)
+  }
+  
+  @objc func narrowPlayerViewAboveTabBar() {
+    playerViewTopToSuperViewTopConstraint.isActive = false
+    playerViewTopToTabBarTopConstraint.isActive = true
+    animatePlayerViewLayoutChange(expanding: false)
+    episodePlayerView.gestureRecognizers?.first?.isEnabled = true
+    
+    episodePlayerView.removeBoundaryTimeObserver()
+    episodePlayerView.removePeriodicTimeObserver()
+  }
+  
+  private func animatePlayerViewLayoutChange(expanding: Bool) {
+    UIView.animate(
+      withDuration: 0.7,
+      delay: 0.0,
+      usingSpringWithDamping: 0.7,
+      initialSpringVelocity: 0.0,
+      options: .curveEaseOut,
+      animations: {
+        if expanding {
+          self.view.layoutIfNeeded()
+          self.tabBar.transform = CGAffineTransform(translationX: 0, y: self.tabBar.frame.height)
+        } else {
+          // because playerView layout rely on tabBar, so need to put tabBar in place first
+          self.tabBar.transform = .identity
+          self.view.layoutIfNeeded()
+        }
+        
+      }
+    )
+  }
+  
 }

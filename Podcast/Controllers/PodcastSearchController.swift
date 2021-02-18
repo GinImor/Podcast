@@ -11,9 +11,7 @@ import Alamofire
 
 enum CellID {
   static let podcast = "PodcastCell"
-  static let podcastNib = "PodcastCell"
   static let episode = "EpisodeCell"
-  static let episodeNib = "EpisodeCell"
 }
 
 class PodcastSearchController: UITableViewController {
@@ -58,7 +56,7 @@ class PodcastSearchController: UITableViewController {
     tableView.estimatedRowHeight = 116
     tableView.rowHeight = UITableView.automaticDimension
     
-    let podcastCellNib = UINib(nibName: CellID.podcastNib, bundle: nil)
+    let podcastCellNib = UINib(nibName: CellID.podcast, bundle: nil)
     tableView.register(podcastCellNib, forCellReuseIdentifier: CellID.podcast)
   }
   

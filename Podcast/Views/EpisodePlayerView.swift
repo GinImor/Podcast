@@ -11,6 +11,13 @@ import AVKit
 
 class EpisodePlayerView: UIView {
   
+  static var shared: EpisodePlayerView = {
+    Bundle.main.loadNibNamed("EpisodePlayerView", owner: nil, options: nil)?.first as! EpisodePlayerView
+  }()
+  
+  var willDismiss: (() -> Void)?
+  var willPopulateWithEpisode: ((Episode) -> Void)?
+  
   @IBOutlet weak var episodeImageView: UIImageView! {
     didSet {
       episodeImageView.layer.cornerRadius = episodeImageView.bounds.width * 0.05
@@ -28,9 +35,7 @@ class EpisodePlayerView: UIView {
   @IBOutlet weak var volumeSlider: UISlider!
   
   @IBAction func dismiss(_ sender: Any) {
-    episodePlayer.removeTimeObserver(boundaryTimeObserver!)
-    episodePlayer.removeTimeObserver(periodicTimeObserver!)
-    removeFromSuperview()
+    willDismiss?()
   }
   
   @IBAction func timeChanged(_ sender: Any) {
@@ -90,7 +95,7 @@ class EpisodePlayerView: UIView {
   var boundaryTimeObserver: Any?
   var periodicTimeObserver: Any?
   
-  fileprivate func addBoundaryTimeObserver() {
+  func addBoundaryTimeObserver() {
     let nsValues = [NSValue(time: CMTime(value: 1, timescale: 3))]
     boundaryTimeObserver = episodePlayer.addBoundaryTimeObserver(forTimes: nsValues, queue: nil) { [unowned self] in
       self.animateEpisodeImageView(shrink: false)
@@ -98,21 +103,25 @@ class EpisodePlayerView: UIView {
     }
   }
   
-  fileprivate func addPeriodicTimeObserver() {
+  func removeBoundaryTimeObserver() {
+    guard let boundaryTimeObserver = self.boundaryTimeObserver else { return }
+    episodePlayer.removeTimeObserver(boundaryTimeObserver)
+    self.boundaryTimeObserver = nil
+  }
+  
+  func addPeriodicTimeObserver() {
     let interval = CMTimeMake(value: 1, timescale: 2)
     periodicTimeObserver = episodePlayer.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { [unowned self] (elapsedTime) in
       self.elapsedTimeLabel.text = elapsedTime.toTimeString()
       let percentage = elapsedTime.devidedBy(self.episodePlayer.currentItem!.duration)
       self.timeControlSlider.value = percentage
     })
-    
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    
-    addBoundaryTimeObserver()
-    addPeriodicTimeObserver()
+  func removePeriodicTimeObserver() {
+    guard let periodicTimeObserver = self.periodicTimeObserver else { return }
+    episodePlayer.removeTimeObserver(periodicTimeObserver)
+    self.periodicTimeObserver = nil
   }
   
   private func playEpisode(_ episode: Episode) {

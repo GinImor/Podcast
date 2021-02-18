@@ -67,7 +67,7 @@ class EpisodesController: UITableViewController {
     tableView.estimatedRowHeight = 116
     tableView.rowHeight = UITableView.automaticDimension
     
-    let cellNib = UINib(nibName: CellID.episodeNib, bundle: nil)
+    let cellNib = UINib(nibName: CellID.episode, bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: CellID.episode)
   }
   
@@ -85,11 +85,9 @@ class EpisodesController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let episodePlayerView = Bundle.main.loadNibNamed("EpisodePlayerView", owner: self, options: nil)?.first as! EpisodePlayerView
+    let episodePlayerView = EpisodePlayerView.shared
     let episode = episodes[indexPath.row]
     
-    episodePlayerView.frame = view.frame
-    episodePlayerView.episode = episode
-    view.window?.addSubview(episodePlayerView)
+    episodePlayerView.willPopulateWithEpisode?(episode)
   }
 }
