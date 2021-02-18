@@ -31,7 +31,8 @@ class PodcastSearchController: UITableViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    searchBar(navigationItem.searchController!.searchBar, textDidChange: "Swift")
+    navigationItem.searchController?.searchBar.text = "Swift"
+    searchBarTextDidEndEditing(navigationItem.searchController!.searchBar)
   }
   
   
@@ -78,8 +79,8 @@ class PodcastSearchController: UITableViewController {
 
 extension PodcastSearchController: UISearchBarDelegate {
   
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    ItunesService.shared.fetchPodcasts(searchText: searchText) { podcasts in
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    ItunesService.shared.fetchPodcasts(searchText: searchBar.text ?? "") { podcasts in
       self.podcasts = podcasts
       self.tableView.reloadData()
     }

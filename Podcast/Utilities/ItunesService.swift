@@ -18,6 +18,7 @@ class ItunesService {
   private var lastSearchText = ""
   
   func fetchPodcasts(searchText: String, completion: @escaping ([Podcast]) -> Void) {
+    guard searchText != "" else { return }
     let parameters = ["term": searchText, "media": "podcast"]
     lastSearchText = searchText
     
