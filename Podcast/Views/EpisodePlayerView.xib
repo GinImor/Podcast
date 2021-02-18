@@ -39,8 +39,14 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OZl-Ak-2kt">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
                                     <subviews>
-                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-zT-Daa">
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-zT-Daa">
                                             <rect key="frame" x="-2" y="0.0" width="347" height="31"/>
+                                            <connections>
+                                                <action selector="timeChanged:" destination="GQq-kM-FRy" eventType="valueChanged" id="J7y-PA-xTP"/>
+                                                <action selector="timeControlDown:" destination="GQq-kM-FRy" eventType="touchDown" id="7NF-zU-3SX"/>
+                                                <action selector="timeControlUpInside:" destination="GQq-kM-FRy" eventType="touchUpInside" id="MSu-xW-xrD"/>
+                                                <action selector="timeControlUpOutside:" destination="GQq-kM-FRy" eventType="touchUpOutside" id="4F6-7U-k8b"/>
+                                            </connections>
                                         </slider>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZMc-I8-t8x">
                                             <rect key="frame" x="0.0" y="38" width="343" height="17"/>
@@ -51,7 +57,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88:88" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tW-Bf-ZQy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tW-Bf-ZQy">
                                                     <rect key="frame" x="175.66666666666663" y="0.0" width="167.33333333333337" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,6 +99,9 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 </preferredSymbolConfiguration>
                                             </state>
+                                            <connections>
+                                                <action selector="goBacward:" destination="GQq-kM-FRy" eventType="touchUpInside" id="7H3-Ur-eNm"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fy-Kh-VF0">
                                             <rect key="frame" x="104.66666666666667" y="0.0" width="3.3333333333333286" height="89"/>
@@ -122,6 +131,9 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 </preferredSymbolConfiguration>
                                             </state>
+                                            <connections>
+                                                <action selector="goForward:" destination="GQq-kM-FRy" eventType="touchUpInside" id="iWh-EX-SeZ"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQd-2f-v8a">
                                             <rect key="frame" x="339.66666666666669" y="0.0" width="3.3333333333333144" height="89"/>
@@ -139,26 +151,35 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WkE-x6-IyI">
                                     <rect key="frame" x="0.0" y="220.33333333333334" width="343" height="92.666666666666657"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-GC-Xlg">
-                                            <rect key="frame" x="0.0" y="35.333333333333258" width="0.0" height="22"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-GC-Xlg">
+                                            <rect key="frame" x="0.0" y="37.333333333333258" width="0.0" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 </preferredSymbolConfiguration>
                                             </state>
+                                            <connections>
+                                                <action selector="minimizeVolume:" destination="GQq-kM-FRy" eventType="touchUpInside" id="x0n-Ve-cu5"/>
+                                            </connections>
                                         </button>
-                                        <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
+                                        <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
                                             <rect key="frame" x="6" y="31.333333333333258" width="331" height="31"/>
+                                            <connections>
+                                                <action selector="volumeChanged:" destination="GQq-kM-FRy" eventType="valueChanged" id="XIF-Ey-yxq"/>
+                                            </connections>
                                         </slider>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-aP-vaP">
-                                            <rect key="frame" x="343" y="35.333333333333258" width="0.0" height="22"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-aP-vaP">
+                                            <rect key="frame" x="343" y="37.333333333333258" width="0.0" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker.3" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 </preferredSymbolConfiguration>
                                             </state>
+                                            <connections>
+                                                <action selector="maximizeVolume:" destination="GQq-kM-FRy" eventType="touchUpInside" id="xCE-BO-dkq"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -182,9 +203,13 @@
             <viewLayoutGuide key="safeArea" id="jsl-CN-MTt"/>
             <connections>
                 <outlet property="authorLabel" destination="p3z-Gg-rSO" id="28J-T2-qOT"/>
+                <outlet property="elapsedTimeLabel" destination="SbD-gv-8SN" id="V2X-XX-vj3"/>
                 <outlet property="episodeImageView" destination="gtY-Q3-ge8" id="RSw-G8-1jx"/>
                 <outlet property="episodeTitleLabel" destination="BTl-bC-wxP" id="k4b-iN-6MV"/>
                 <outlet property="playButton" destination="Hpb-kg-59P" id="qBI-XQ-svk"/>
+                <outlet property="timeControlSlider" destination="FhW-zT-Daa" id="47y-ga-xxk"/>
+                <outlet property="totalTimeLabel" destination="1tW-Bf-ZQy" id="FEs-RY-2Dn"/>
+                <outlet property="volumeSlider" destination="I9O-4n-Xfv" id="VtA-2S-WqP"/>
             </connections>
             <point key="canvasLocation" x="-104.34782608695653" y="110.49107142857143"/>
         </view>

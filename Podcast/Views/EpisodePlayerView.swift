@@ -18,26 +18,59 @@ class EpisodePlayerView: UIView {
       shrinkEpisodeImageView()
     }
   }
+  
+  @IBOutlet weak var timeControlSlider: UISlider!
+  @IBOutlet weak var elapsedTimeLabel: UILabel!
+  @IBOutlet weak var totalTimeLabel: UILabel!
   @IBOutlet weak var episodeTitleLabel: UILabel!
   @IBOutlet weak var authorLabel: UILabel!
   @IBOutlet weak var playButton: UIButton!
+  @IBOutlet weak var volumeSlider: UISlider!
   
   @IBAction func dismiss(_ sender: Any) {
     episodePlayer.removeTimeObserver(boundaryTimeObserver!)
+    episodePlayer.removeTimeObserver(periodicTimeObserver!)
     removeFromSuperview()
   }
   
+  @IBAction func timeChanged(_ sender: Any) {
+    let percentage = timeControlSlider.value
+    let seekFloatTime = Float64(percentage) * episodePlayer.currentItem!.duration.preciseSec
+    let seekCMTime = CMTimeMakeWithSeconds(seekFloatTime, preferredTimescale: 1)
+    episodePlayer.seek(to: seekCMTime)
+  }
+  @IBAction func timeControlDown(_ sender: Any) { playerSwitchToPaused() }
+  @IBAction func timeControlUpInside(_ sender: Any) { playerSwitchToPlay() }
+  @IBAction func timeControlUpOutside(_ sender: Any) { playerSwitchToPlay() }
+  
+  @IBAction func goBacward(_ sender: Any) { goBy(delta: -15) }
+  
+  // notice player status will change without notice
   @IBAction func playOrPause(_ sender: UIButton) {
     if episodePlayer.timeControlStatus == .paused {
-      episodePlayer.play()
-      playButton.setImage(UIImage(systemName: "pause"), for: .normal)
-      animateEpisodeImageView(shrink: false)
+      playerSwitchToPlay()
     } else {
-      episodePlayer.pause()
-      playButton.setImage(UIImage(systemName: "play"), for: .normal)
-      animateEpisodeImageView(shrink: true)
+      playerSwitchToPaused()
     }
   }
+  
+  private func playerSwitchToPlay() {
+    episodePlayer.play()
+    playButton.setImage(UIImage(systemName: "pause"), for: .normal)
+    animateEpisodeImageView(shrink: false)
+  }
+  
+  private func playerSwitchToPaused() {
+    episodePlayer.pause()
+    playButton.setImage(UIImage(systemName: "play"), for: .normal)
+    animateEpisodeImageView(shrink: true)
+  }
+  
+  @IBAction func goForward(_ sender: Any) { goBy(delta: 15) }
+  
+  @IBAction func minimizeVolume(_ sender: Any) { volumeChangeTo(0.0) }
+  @IBAction func volumeChanged(_ sender: Any) { volumeChangeTo(volumeSlider.value) }
+  @IBAction func maximizeVolume(_ sender: Any) { volumeChangeTo(1.0) }
   
   var episode: Episode! {
     didSet {
@@ -55,14 +88,31 @@ class EpisodePlayerView: UIView {
   }()
   
   var boundaryTimeObserver: Any?
+  var periodicTimeObserver: Any?
+  
+  fileprivate func addBoundaryTimeObserver() {
+    let nsValues = [NSValue(time: CMTime(value: 1, timescale: 3))]
+    boundaryTimeObserver = episodePlayer.addBoundaryTimeObserver(forTimes: nsValues, queue: nil) { [unowned self] in
+      self.animateEpisodeImageView(shrink: false)
+      self.totalTimeLabel.text = self.episodePlayer.currentItem?.duration.toTimeString()
+    }
+  }
+  
+  fileprivate func addPeriodicTimeObserver() {
+    let interval = CMTimeMake(value: 1, timescale: 2)
+    periodicTimeObserver = episodePlayer.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { [unowned self] (elapsedTime) in
+      self.elapsedTimeLabel.text = elapsedTime.toTimeString()
+      let percentage = elapsedTime.devidedBy(self.episodePlayer.currentItem!.duration)
+      self.timeControlSlider.value = percentage
+    })
+    
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    let nsValues = [NSValue(time: CMTime(value: 1, timescale: 3))]
-    boundaryTimeObserver = episodePlayer.addBoundaryTimeObserver(forTimes: nsValues, queue: nil) { [unowned self] in
-      self.animateEpisodeImageView(shrink: false)
-    }
+    addBoundaryTimeObserver()
+    addPeriodicTimeObserver()
   }
   
   private func playEpisode(_ episode: Episode) {
@@ -98,5 +148,13 @@ class EpisodePlayerView: UIView {
     )
   }
   
+  private func goBy(delta: Float64) {
+    let seekCMTime = episodePlayer.currentTime() + CMTimeMakeWithSeconds(delta, preferredTimescale: 1)
+    episodePlayer.seek(to: seekCMTime)
+  }
   
+  private func volumeChangeTo(_ volume: Float) {
+    episodePlayer.volume = volume
+    volumeSlider.value = volume
+  }
 }
