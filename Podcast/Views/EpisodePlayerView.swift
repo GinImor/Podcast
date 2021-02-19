@@ -74,17 +74,20 @@ class EpisodePlayerView: UIView {
     miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
   }
   
+  private func setPlayButtonImage(named: String) {
+    playButton.setImage(UIImage(systemName: named), for: .normal)
+    miniPlayButton.setImage(UIImage(systemName: named), for: .normal)
+  }
+  
   private func playerSwitchToPlay() {
     episodePlayer.play()
-    playButton.setImage(UIImage(systemName: "pause"), for: .normal)
-    miniPlayButton.setImage(UIImage(systemName: "pause"), for: .normal)
+    setPlayButtonImage(named: "pause")
     animateEpisodeImageView(shrink: false)
   }
   
   private func playerSwitchToPaused() {
     episodePlayer.pause()
-    playButton.setImage(UIImage(systemName: "play"), for: .normal)
-    miniPlayButton.setImage(UIImage(systemName: "play"), for: .normal)
+    setPlayButtonImage(named: "play")
     animateEpisodeImageView(shrink: true)
   }
   
@@ -165,6 +168,7 @@ class EpisodePlayerView: UIView {
   }
   
   private func playEpisode(_ episode: Episode) {
+    setPlayButtonImage(named: "pause")
     guard let audioUrl = URL(string: episode.audioUrl) else { return }
     
     let playerItem = AVPlayerItem(url: audioUrl)
