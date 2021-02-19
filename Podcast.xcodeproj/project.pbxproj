@@ -14,6 +14,7 @@
 		DC4E913725D8CFF600B6EB85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913525D8CFF600B6EB85 /* Main.storyboard */; };
 		DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913825D8CFF800B6EB85 /* Assets.xcassets */; };
 		DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */; };
+		DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */; };
 		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
@@ -47,6 +48,7 @@
 		DC4E913825D8CFF800B6EB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC4E913B25D8CFF800B6EB85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC4E913D25D8CFF800B6EB85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+onesideBorder.swift"; sourceTree = "<group>"; };
 		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
@@ -151,6 +153,7 @@
 				DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */,
 				DCA73FC325DC9FA9008B64D4 /* String+httpTransformToHttps.swift */,
 				DC7B420225DD68440014684F /* CMTime+utility.swift */,
+				DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */,
 				DC7B420325DD68440014684F /* CMTime+utility.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
+				DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
 				DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */,

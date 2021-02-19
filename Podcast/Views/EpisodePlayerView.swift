@@ -68,6 +68,12 @@ class EpisodePlayerView: UIView {
     }
   }
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
+  }
+  
   private func playerSwitchToPlay() {
     episodePlayer.play()
     playButton.setImage(UIImage(systemName: "pause"), for: .normal)
