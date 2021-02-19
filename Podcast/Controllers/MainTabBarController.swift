@@ -58,6 +58,7 @@ class MainTabBarController: UITabBarController {
     ])
     
     episodePlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))
+    episodePlayerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
     
     episodePlayerView.willDismiss = { [unowned self] in
       self.narrowPlayerViewAboveTabBar()
@@ -67,6 +68,47 @@ class MainTabBarController: UITabBarController {
         self.episodePlayerView.episode = episode
       }
       self.expandPlayerViewToTop()
+    }
+  }
+  
+  var isMiniPlayerView: Bool { playerViewTopToTabBarTopConstraint.isActive }
+  
+  @objc func handlePan(_ pan: UIPanGestureRecognizer) {
+    let translationY = pan.translation(in: self.view).y
+    let percentage = abs(translationY / (self.view.frame.height/2))
+    
+    switch pan.state {
+    case .began:
+      print(translationY, pan.velocity(in: self.view).y)
+    case .changed:
+      
+      if isMiniPlayerView && translationY > 0 || !isMiniPlayerView && translationY < 0 {
+        return
+      }
+      episodePlayerView.transform = CGAffineTransform(translationX: 0, y: translationY)
+      
+      episodePlayerView.miniView.alpha = isMiniPlayerView ? 1 - percentage : percentage
+      episodePlayerView.fullSizeView.alpha = isMiniPlayerView ? percentage : 1 - percentage
+    case .ended:
+
+      let velocityY = pan.velocity(in: self.view).y
+      UIView.animate(withDuration: 0.3) {
+        self.episodePlayerView.transform = .identity
+      }
+      if percentage > 0.5 || (isMiniPlayerView && velocityY < -500 || !isMiniPlayerView && velocityY > 500) {
+        if self.isMiniPlayerView {
+          self.expandPlayerViewToTop()
+        } else {
+          self.narrowPlayerViewAboveTabBar()
+        }
+      } else {
+        UIView.animate(withDuration: 0.3) {
+          self.episodePlayerView.miniView.alpha = self.isMiniPlayerView ? 1 : 0
+          self.episodePlayerView.fullSizeView.alpha = self.isMiniPlayerView ? 0 : 1
+        }
+      }
+    default:
+      break
     }
   }
   
