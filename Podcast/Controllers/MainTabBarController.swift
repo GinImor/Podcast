@@ -63,15 +63,14 @@ class MainTabBarController: UITabBarController {
       self.narrowPlayerViewAboveTabBar()
     }
     episodePlayerView.willPopulateWithEpisode = { [unowned self] (episode) in
-      self.episodePlayerView.episode = episode
+      if self.episodePlayerView.episode != episode {
+        self.episodePlayerView.episode = episode
+      }
       self.expandPlayerViewToTop()
     }
   }
   
   @objc func expandPlayerViewToTop() {
-    episodePlayerView.addBoundaryTimeObserver()
-    episodePlayerView.addPeriodicTimeObserver()
-    
     episodePlayerView.gestureRecognizers?.first?.isEnabled = false
     playerViewTopToTabBarTopConstraint.isActive = false
     playerViewTopToSuperViewTopConstraint.isActive = true
@@ -84,9 +83,6 @@ class MainTabBarController: UITabBarController {
     playerViewTopToTabBarTopConstraint.isActive = true
     animatePlayerViewLayoutChange(expanding: false)
     episodePlayerView.gestureRecognizers?.first?.isEnabled = true
-    
-    episodePlayerView.removeBoundaryTimeObserver()
-    episodePlayerView.removePeriodicTimeObserver()
   }
   
   private func animatePlayerViewLayoutChange(expanding: Bool) {

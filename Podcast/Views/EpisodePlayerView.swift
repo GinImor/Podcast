@@ -96,6 +96,12 @@ class EpisodePlayerView: UIView {
   
   var episode: Episode! {
     didSet {
+      setupTimeObserver()
+      
+      elapsedTimeLabel.text = "00:00:00"
+      totalTimeLabel.text = "--:--:--"
+      timeControlSlider.value = 0
+      
       episodeTitleLabel.text = episode.title
       miniEpisodeTitleLabel.text = episode.title
       authorLabel.text = episode.author
@@ -113,6 +119,21 @@ class EpisodePlayerView: UIView {
   
   var boundaryTimeObserver: Any?
   var periodicTimeObserver: Any?
+  
+  func setupTimeObserver() {
+    removeTimeObserver()
+    addTimeObserver()
+  }
+  
+  func addTimeObserver() {
+    addBoundaryTimeObserver()
+    addPeriodicTimeObserver()
+  }
+  
+  func removeTimeObserver() {
+    removeBoundaryTimeObserver()
+    removePeriodicTimeObserver()
+  }
   
   func addBoundaryTimeObserver() {
     let nsValues = [NSValue(time: CMTime(value: 1, timescale: 3))]
