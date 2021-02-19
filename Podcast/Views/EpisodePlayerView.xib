@@ -267,6 +267,7 @@
                 <outlet property="fullSizeView" destination="BjK-ST-6iY" id="zi7-2Q-xxL"/>
                 <outlet property="miniEpisodeImageView" destination="ZFc-yN-7ly" id="HWd-xu-m6a"/>
                 <outlet property="miniEpisodeTitleLabel" destination="xXV-AS-0r6" id="seE-ow-el4"/>
+                <outlet property="miniPlayButton" destination="yfo-tb-LPu" id="LAG-KL-ctu"/>
                 <outlet property="miniView" destination="9LW-yB-0lC" id="Hzr-cZ-ouy"/>
                 <outlet property="playButton" destination="Hpb-kg-59P" id="qBI-XQ-svk"/>
                 <outlet property="timeControlSlider" destination="FhW-zT-Daa" id="47y-ga-xxk"/>

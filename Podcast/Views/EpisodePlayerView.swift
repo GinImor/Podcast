@@ -24,6 +24,7 @@ class EpisodePlayerView: UIView {
   
   @IBOutlet weak var miniEpisodeImageView: UIImageView!
   @IBOutlet weak var miniEpisodeTitleLabel: UILabel!
+  @IBOutlet weak var miniPlayButton: UIButton!
   
   
   @IBOutlet weak var episodeImageView: UIImageView! {
@@ -70,12 +71,14 @@ class EpisodePlayerView: UIView {
   private func playerSwitchToPlay() {
     episodePlayer.play()
     playButton.setImage(UIImage(systemName: "pause"), for: .normal)
+    miniPlayButton.setImage(UIImage(systemName: "pause"), for: .normal)
     animateEpisodeImageView(shrink: false)
   }
   
   private func playerSwitchToPaused() {
     episodePlayer.pause()
     playButton.setImage(UIImage(systemName: "play"), for: .normal)
+    miniPlayButton.setImage(UIImage(systemName: "play"), for: .normal)
     animateEpisodeImageView(shrink: true)
   }
   
