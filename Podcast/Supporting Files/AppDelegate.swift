@@ -31,6 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().scrollEdgeAppearance = barStandardAppearance
   }
   
+  func applicationDidEnterBackground(_ application: UIApplication) {
+    EpisodePlayerView.shared.didEnterBackground = true
+  }
+  
+  func applicationWillEnterForeground(_ application: UIApplication) {
+    EpisodePlayerView.shared.didEnterBackground = false
+  }
+  
   // MARK: UISceneSession Lifecycle
 
   func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

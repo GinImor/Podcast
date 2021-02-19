@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import MediaPlayer
 
 class EpisodePlayerView: UIView {
   
@@ -18,6 +19,7 @@ class EpisodePlayerView: UIView {
   var willDismiss: (() -> Void)?
   var willPopulateWithEpisode: ((Episode) -> Void)?
   
+  var didEnterBackground: Bool = false
 
   @IBOutlet weak var miniView: UIView!
   @IBOutlet weak var fullSizeView: UIStackView!
@@ -60,7 +62,7 @@ class EpisodePlayerView: UIView {
   @IBAction func goBacward(_ sender: Any) { goBy(delta: -15) }
   
   // notice player status will change without notice
-  @IBAction func playOrPause(_ sender: UIButton) {
+  @IBAction func playOrPause(_ sender: Any? = nil) {
     if episodePlayer.timeControlStatus == .paused {
       playerSwitchToPlay()
     } else {
@@ -73,6 +75,7 @@ class EpisodePlayerView: UIView {
     
     miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
     setupAudioSession()
+    setupPlayPauseCommand()
   }
   
   private func setupAudioSession() {
@@ -81,6 +84,30 @@ class EpisodePlayerView: UIView {
       try AVAudioSession.sharedInstance().setActive(true)
     } catch {
       print(error)
+    }
+  }
+  
+  private func setupPlayPauseCommand() {
+    let remoteCommandCenter = MPRemoteCommandCenter.shared()
+    
+    UIApplication.shared.beginReceivingRemoteControlEvents()
+    
+    remoteCommandCenter.playCommand.isEnabled = true
+    remoteCommandCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+      self.playerSwitchToPlay()
+      return .success
+    }
+    
+    remoteCommandCenter.pauseCommand.isEnabled = true
+    remoteCommandCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+      self.playerSwitchToPaused()
+      return .success
+    }
+    
+    remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
+    remoteCommandCenter.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+      self.playOrPause()
+      return .success
     }
   }
   
@@ -198,17 +225,28 @@ class EpisodePlayerView: UIView {
   }
   
   private func animateEpisodeImageView(shrink: Bool) {
-    UIView.animate(
-      withDuration: 0.5,
-      delay: 0.0,
-      usingSpringWithDamping: 0.5,
-      initialSpringVelocity: 0.0,
-      options: .curveEaseOut,
-      animations:  {
-        if shrink { self.shrinkEpisodeImageView() }
-        else { self.unshrinkEpisodeImageView() }
+    if fullSizeView.alpha != 1.0 || didEnterBackground {
+      UIView.performWithoutAnimation {
+        self.shrinkEpisodeImageView(shrink)
       }
-    )
+    }
+    else {
+      UIView.animate(
+        withDuration: 0.5,
+        delay: 0.0,
+        usingSpringWithDamping: 0.5,
+        initialSpringVelocity: 0.0,
+        options: .curveEaseOut,
+        animations:  {
+          self.shrinkEpisodeImageView(shrink)
+        }
+      )
+    }
+  }
+  
+  private func shrinkEpisodeImageView(_ shrink: Bool) {
+    if shrink { self.shrinkEpisodeImageView() }
+    else { self.unshrinkEpisodeImageView() }
   }
   
   private func goBy(delta: Float64) {
