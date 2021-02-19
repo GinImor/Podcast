@@ -20,6 +20,8 @@ class MainTabBarController: UITabBarController {
     setupBarAppearance()
     setupChileVCs()
     setupPlayerView()
+    
+//    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))
   }
   
   private func setupBarAppearance() {
@@ -103,7 +105,8 @@ class MainTabBarController: UITabBarController {
           self.tabBar.transform = .identity
           self.view.layoutIfNeeded()
         }
-        
+        self.episodePlayerView.miniView.alpha = expanding ? 0.0 : 1.0
+        self.episodePlayerView.fullSizeView.alpha = expanding ? 1.0 : 0.0
       }
     )
   }

@@ -18,6 +18,14 @@ class EpisodePlayerView: UIView {
   var willDismiss: (() -> Void)?
   var willPopulateWithEpisode: ((Episode) -> Void)?
   
+
+  @IBOutlet weak var miniView: UIView!
+  @IBOutlet weak var fullSizeView: UIStackView!
+  
+  @IBOutlet weak var miniEpisodeImageView: UIImageView!
+  @IBOutlet weak var miniEpisodeTitleLabel: UILabel!
+  
+  
   @IBOutlet weak var episodeImageView: UIImageView! {
     didSet {
       episodeImageView.layer.cornerRadius = episodeImageView.bounds.width * 0.05
@@ -80,9 +88,11 @@ class EpisodePlayerView: UIView {
   var episode: Episode! {
     didSet {
       episodeTitleLabel.text = episode.title
+      miniEpisodeTitleLabel.text = episode.title
       authorLabel.text = episode.author
       
       episodeImageView.sd_setImage(with: URL(string: episode.imageUrl))
+      miniEpisodeImageView.image = episodeImageView.image
       playEpisode(episode)
     }
   }
