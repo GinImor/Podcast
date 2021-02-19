@@ -72,6 +72,16 @@ class EpisodePlayerView: UIView {
     super.awakeFromNib()
     
     miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
+    setupAudioSession()
+  }
+  
+  private func setupAudioSession() {
+    do {
+      try AVAudioSession.sharedInstance().setCategory(.playback)
+      try AVAudioSession.sharedInstance().setActive(true)
+    } catch {
+      print(error)
+    }
   }
   
   private func setPlayButtonImage(named: String) {
