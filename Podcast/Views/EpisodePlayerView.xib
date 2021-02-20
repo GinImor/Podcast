@@ -122,16 +122,16 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yv5-Lh-dNu">
-                                    <rect key="frame" x="0.0" y="63" width="311" height="52.333333333333343"/>
+                                    <rect key="frame" x="0.0" y="63" width="311" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTl-bC-wxP">
-                                            <rect key="frame" x="0.0" y="0.0" width="311" height="26.333333333333332"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="311" height="24"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3z-Gg-rSO">
-                                            <rect key="frame" x="0.0" y="34.333333333333314" width="311" height="18"/>
+                                            <rect key="frame" x="0.0" y="32" width="311" height="18"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -139,7 +139,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-gw-6xn">
-                                    <rect key="frame" x="0.0" y="123.33333333333337" width="311" height="89"/>
+                                    <rect key="frame" x="0.0" y="121" width="311" height="89"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mml-cj-9zK">
                                             <rect key="frame" x="0.0" y="0.0" width="3" height="89"/>
@@ -203,10 +203,10 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WkE-x6-IyI">
-                                    <rect key="frame" x="0.0" y="220.33333333333334" width="311" height="124.66666666666666"/>
+                                    <rect key="frame" x="0.0" y="218" width="311" height="127"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-GC-Xlg">
-                                            <rect key="frame" x="0.0" y="53.333333333333258" width="16.333333333333332" height="18"/>
+                                            <rect key="frame" x="0.0" y="54.666666666666629" width="16.333333333333332" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
@@ -218,13 +218,13 @@
                                             </connections>
                                         </button>
                                         <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
-                                            <rect key="frame" x="30.333333333333329" y="47.333333333333258" width="242.66666666666669" height="31"/>
+                                            <rect key="frame" x="30.333333333333329" y="48.666666666666629" width="242.66666666666669" height="31"/>
                                             <connections>
                                                 <action selector="volumeChanged:" destination="GQq-kM-FRy" eventType="valueChanged" id="XIF-Ey-yxq"/>
                                             </connections>
                                         </slider>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-aP-vaP">
-                                            <rect key="frame" x="287" y="53.333333333333258" width="24" height="18"/>
+                                            <rect key="frame" x="287" y="54.666666666666629" width="24" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker.3" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
