@@ -75,7 +75,8 @@ class MainTabBarController: UITabBarController {
   
   @objc func handlePan(_ pan: UIPanGestureRecognizer) {
     let translationY = pan.translation(in: self.view).y
-    let percentage = abs(translationY / (self.view.frame.height/2))
+    let rawPercentage = translationY / (self.view.frame.height/2)
+    let percentage = abs(rawPercentage)
     
     switch pan.state {
     case .began:
@@ -95,12 +96,10 @@ class MainTabBarController: UITabBarController {
       UIView.animate(withDuration: 0.3) {
         self.episodePlayerView.transform = .identity
       }
-      if percentage > 0.5 || (isMiniPlayerView && velocityY < -500 || !isMiniPlayerView && velocityY > 500) {
-        if self.isMiniPlayerView {
-          self.expandPlayerViewToTop()
-        } else {
-          self.narrowPlayerViewAboveTabBar()
-        }
+      if isMiniPlayerView && (velocityY < -500 || rawPercentage < -0.5) {
+        self.expandPlayerViewToTop()
+      } else if !isMiniPlayerView && (velocityY > 500 || rawPercentage > 0.5) {
+        self.narrowPlayerViewAboveTabBar()
       } else {
         UIView.animate(withDuration: 0.3) {
           self.episodePlayerView.miniView.alpha = self.isMiniPlayerView ? 1 : 0
