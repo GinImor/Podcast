@@ -54,6 +54,7 @@ class EpisodePlayerView: UIView {
     let seekFloatTime = Float64(percentage) * episodePlayer.currentItem!.duration.preciseSec
     let seekCMTime = CMTimeMakeWithSeconds(seekFloatTime, preferredTimescale: 1)
     episodePlayer.seek(to: seekCMTime)
+    self.setupLockScreenPlayElapsedTime()
   }
   @IBAction func timeControlDown(_ sender: Any) { playerSwitchToPaused() }
   @IBAction func timeControlUpInside(_ sender: Any) { playerSwitchToPlay() }
@@ -95,18 +96,21 @@ class EpisodePlayerView: UIView {
     remoteCommandCenter.playCommand.isEnabled = true
     remoteCommandCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
       self.playerSwitchToPlay()
+      self.setupLockScreenPlayElapsedTime()
       return .success
     }
     
     remoteCommandCenter.pauseCommand.isEnabled = true
     remoteCommandCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
       self.playerSwitchToPaused()
+      self.setupLockScreenPlayElapsedTime()
       return .success
     }
     
     remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
     remoteCommandCenter.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
       self.playOrPause()
+      self.setupLockScreenPlayElapsedTime()
       return .success
     }
   }
@@ -201,6 +205,8 @@ class EpisodePlayerView: UIView {
     boundaryTimeObserver = episodePlayer.addBoundaryTimeObserver(forTimes: nsValues, queue: nil) { [unowned self] in
       self.animateEpisodeImageView(shrink: false)
       self.totalTimeLabel.text = self.episodePlayer.currentItem?.duration.toTimeString()
+      self.setupLockScreenPlayDuration()
+      self.setupLockScreenPlayElapsedTime()
     }
   }
   
@@ -216,8 +222,6 @@ class EpisodePlayerView: UIView {
       self.elapsedTimeLabel.text = elapsedTime.toTimeString()
       let percentage = elapsedTime.devidedBy(self.episodePlayer.currentItem!.duration)
       self.timeControlSlider.value = percentage
-      
-      self.setupLockScreenPlayTime()
     })
   }
   
@@ -227,15 +231,20 @@ class EpisodePlayerView: UIView {
     self.periodicTimeObserver = nil
   }
   
-  func setupLockScreenPlayTime() {
-    var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
-    
+  var nowPlayingInfo: [String: Any]? {
+    get { MPNowPlayingInfoCenter.default().nowPlayingInfo}
+    set {
+      MPNowPlayingInfoCenter.default().nowPlayingInfo = newValue
+    }
+  }
+  
+  func setupLockScreenPlayDuration() {
     guard let currentItem = episodePlayer.currentItem else { return }
-    
     nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = currentItem.duration.preciseSec
+  }
+  
+  func setupLockScreenPlayElapsedTime() {
     nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = episodePlayer.currentTime().preciseSec
-    
-    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   
   private func playEpisode(_ episode: Episode) {
