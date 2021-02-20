@@ -11,8 +11,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
   
   let episodePlayerView = EpisodePlayerView.shared
-  var playerViewTopToSuperViewTopConstraint: NSLayoutConstraint!
-  var playerViewTopToTabBarTopConstraint: NSLayoutConstraint!
+  var playerViewTopToSuperViewBottomConstraint: NSLayoutConstraint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,8 +19,6 @@ class MainTabBarController: UITabBarController {
     setupBarAppearance()
     setupChileVCs()
     setupPlayerView()
-    
-//    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))
   }
   
   private func setupBarAppearance() {
@@ -45,13 +42,11 @@ class MainTabBarController: UITabBarController {
     
     episodePlayerView.disableTAMIC()
     
-    playerViewTopToSuperViewTopConstraint =
-      episodePlayerView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height)
-    playerViewTopToTabBarTopConstraint =
-      tabBar.topAnchor.constraint(equalTo: episodePlayerView.topAnchor, constant: 64)
+    playerViewTopToSuperViewBottomConstraint =
+      episodePlayerView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
     
     NSLayoutConstraint.activate([
-      playerViewTopToSuperViewTopConstraint,
+      playerViewTopToSuperViewBottomConstraint,
       episodePlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       view.trailingAnchor.constraint(equalTo: episodePlayerView.trailingAnchor),
       episodePlayerView.heightAnchor.constraint(equalToConstant: view.bounds.height)
@@ -71,7 +66,10 @@ class MainTabBarController: UITabBarController {
     }
   }
   
-  var isMiniPlayerView: Bool { playerViewTopToTabBarTopConstraint.isActive }
+  var isMiniPlayerView = false
+  var topConstant: CGFloat { -view.frame.height }
+  var lowConstant: CGFloat { -(tabBar.frame.height+64)}
+  var initialConstantY: CGFloat { isMiniPlayerView ? lowConstant : topConstant }
   
   @objc func handlePan(_ pan: UIPanGestureRecognizer) {
     let translationY = pan.translation(in: self.view).y
@@ -80,31 +78,29 @@ class MainTabBarController: UITabBarController {
     
     switch pan.state {
     case .began:
-      print(translationY, pan.velocity(in: self.view).y)
+      isMiniPlayerView = episodePlayerView.miniView.alpha == 1.0
     case .changed:
       
       if isMiniPlayerView && translationY > 0 || !isMiniPlayerView && translationY < 0 {
         return
       }
-      episodePlayerView.transform = CGAffineTransform(translationX: 0, y: translationY)
+      
+      playerViewTopToSuperViewBottomConstraint.constant = initialConstantY + translationY
       
       episodePlayerView.miniView.alpha = isMiniPlayerView ? 1 - percentage : percentage
       episodePlayerView.fullSizeView.alpha = isMiniPlayerView ? percentage : 1 - percentage
     case .ended:
 
       let velocityY = pan.velocity(in: self.view).y
-      UIView.animate(withDuration: 0.3) {
-        self.episodePlayerView.transform = .identity
-      }
+      
       if isMiniPlayerView && (velocityY < -500 || rawPercentage < -0.5) {
         self.expandPlayerViewToTop()
       } else if !isMiniPlayerView && (velocityY > 500 || rawPercentage > 0.5) {
         self.narrowPlayerViewAboveTabBar()
+      } else if isMiniPlayerView {
+        self.narrowPlayerViewAboveTabBar()
       } else {
-        UIView.animate(withDuration: 0.3) {
-          self.episodePlayerView.miniView.alpha = self.isMiniPlayerView ? 1 : 0
-          self.episodePlayerView.fullSizeView.alpha = self.isMiniPlayerView ? 0 : 1
-        }
+        self.expandPlayerViewToTop()
       }
     default:
       break
@@ -113,17 +109,14 @@ class MainTabBarController: UITabBarController {
   
   @objc func expandPlayerViewToTop() {
     episodePlayerView.gestureRecognizers?.first?.isEnabled = false
-    playerViewTopToTabBarTopConstraint.isActive = false
-    playerViewTopToSuperViewTopConstraint.isActive = true
-    playerViewTopToSuperViewTopConstraint.constant = 0
+    playerViewTopToSuperViewBottomConstraint.constant = topConstant
     animatePlayerViewLayoutChange(expanding: true)
   }
   
   @objc func narrowPlayerViewAboveTabBar() {
-    playerViewTopToSuperViewTopConstraint.isActive = false
-    playerViewTopToTabBarTopConstraint.isActive = true
-    animatePlayerViewLayoutChange(expanding: false)
     episodePlayerView.gestureRecognizers?.first?.isEnabled = true
+    playerViewTopToSuperViewBottomConstraint.constant = lowConstant
+    animatePlayerViewLayoutChange(expanding: false)
   }
   
   private func animatePlayerViewLayoutChange(expanding: Bool) {
@@ -136,10 +129,10 @@ class MainTabBarController: UITabBarController {
       animations: {
         if expanding {
           self.view.layoutIfNeeded()
-          self.tabBar.transform = CGAffineTransform(translationX: 0, y: self.tabBar.frame.height)
+          self.tabBar.alpha = 0.0
         } else {
           // because playerView layout rely on tabBar, so need to put tabBar in place first
-          self.tabBar.transform = .identity
+          self.tabBar.alpha = 1.0
           self.view.layoutIfNeeded()
         }
         self.episodePlayerView.miniView.alpha = expanding ? 0.0 : 1.0
