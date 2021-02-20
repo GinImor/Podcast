@@ -146,10 +146,31 @@ class EpisodePlayerView: UIView {
       miniEpisodeTitleLabel.text = episode.title
       authorLabel.text = episode.author
       
-      episodeImageView.sd_setImage(with: URL(string: episode.imageUrl))
-      miniEpisodeImageView.image = episodeImageView.image
+      let imageURL = URL(string: episode.imageUrl)
+      episodeImageView.sd_setImage(with: imageURL)
+      miniEpisodeImageView.sd_setImage(with: imageURL) { (image, _, _, _) in
+        self.setupNowPlayingInfo(image: image)
+      }
+      
+      
       playEpisode(episode)
     }
+  }
+  
+  private func setupNowPlayingInfo(image: UIImage?) {
+    var nowPlayingInfo = [String: Any]()
+    
+    nowPlayingInfo[MPMediaItemPropertyTitle] = episode.title
+    nowPlayingInfo[MPMediaItemPropertyArtist] = episode.author
+    
+    if let image = image {
+      let itemArtwork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
+        image
+      }
+      nowPlayingInfo[MPMediaItemPropertyArtwork] = itemArtwork
+    }
+    
+    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   
   let episodePlayer: AVPlayer = {
@@ -195,6 +216,8 @@ class EpisodePlayerView: UIView {
       self.elapsedTimeLabel.text = elapsedTime.toTimeString()
       let percentage = elapsedTime.devidedBy(self.episodePlayer.currentItem!.duration)
       self.timeControlSlider.value = percentage
+      
+      self.setupLockScreenPlayTime()
     })
   }
   
@@ -202,6 +225,17 @@ class EpisodePlayerView: UIView {
     guard let periodicTimeObserver = self.periodicTimeObserver else { return }
     episodePlayer.removeTimeObserver(periodicTimeObserver)
     self.periodicTimeObserver = nil
+  }
+  
+  func setupLockScreenPlayTime() {
+    var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo
+    
+    guard let currentItem = episodePlayer.currentItem else { return }
+    
+    nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = currentItem.duration.preciseSec
+    nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = episodePlayer.currentTime().preciseSec
+    
+    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   
   private func playEpisode(_ episode: Episode) {
