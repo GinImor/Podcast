@@ -21,6 +21,13 @@ class MainTabBarController: UITabBarController {
     setupPlayerView()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    episodePlayerView.fullSizeViewBottomToSuperViewBottom.constant =
+      view.bounds.height * 0.55 + view.window!.safeAreaInsets.bottom
+  }
+  
   private func setupBarAppearance() {
     tabBar.tintColor = .primaryColor
   }
@@ -49,7 +56,7 @@ class MainTabBarController: UITabBarController {
       playerViewTopToSuperViewBottomConstraint,
       episodePlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       view.trailingAnchor.constraint(equalTo: episodePlayerView.trailingAnchor),
-      episodePlayerView.heightAnchor.constraint(equalToConstant: view.bounds.height)
+      episodePlayerView.heightAnchor.constraint(equalToConstant: view.bounds.height * 1.5)
     ])
     
     episodePlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))

@@ -12,6 +12,8 @@ import MediaPlayer
 
 class EpisodePlayerView: UIView {
   
+  @IBOutlet weak var fullSizeViewBottomToSuperViewBottom: NSLayoutConstraint!
+  
   static var shared: EpisodePlayerView = {
     Bundle.main.loadNibNamed("EpisodePlayerView", owner: nil, options: nil)?.first as! EpisodePlayerView
   }()

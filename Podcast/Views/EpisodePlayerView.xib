@@ -69,7 +69,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BjK-ST-6iY">
-                    <rect key="frame" x="32" y="52" width="311" height="702"/>
+                    <rect key="frame" x="32" y="52" width="311" height="760"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JW-kB-XpU">
                             <rect key="frame" x="127.66666666666666" y="0.0" width="56" height="30"/>
@@ -88,7 +88,7 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZR2-K6-muQ">
-                            <rect key="frame" x="0.0" y="357" width="311" height="345"/>
+                            <rect key="frame" x="0.0" y="357" width="311" height="403"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OZl-Ak-2kt">
                                     <rect key="frame" x="0.0" y="0.0" width="311" height="55"/>
@@ -203,10 +203,10 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WkE-x6-IyI">
-                                    <rect key="frame" x="0.0" y="218" width="311" height="127"/>
+                                    <rect key="frame" x="0.0" y="218" width="311" height="185"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-GC-Xlg">
-                                            <rect key="frame" x="0.0" y="54.666666666666629" width="16.333333333333332" height="18"/>
+                                            <rect key="frame" x="0.0" y="83.666666666666629" width="16.333333333333332" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
@@ -218,13 +218,13 @@
                                             </connections>
                                         </button>
                                         <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="I9O-4n-Xfv">
-                                            <rect key="frame" x="30.333333333333329" y="48.666666666666629" width="242.66666666666669" height="31"/>
+                                            <rect key="frame" x="30.333333333333329" y="77.666666666666629" width="242.66666666666669" height="31"/>
                                             <connections>
                                                 <action selector="volumeChanged:" destination="GQq-kM-FRy" eventType="valueChanged" id="XIF-Ey-yxq"/>
                                             </connections>
                                         </slider>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-aP-vaP">
-                                            <rect key="frame" x="287" y="54.666666666666629" width="24" height="18"/>
+                                            <rect key="frame" x="287" y="83.666666666666629" width="24" height="18"/>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="speaker.3" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
@@ -249,7 +249,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="jsl-CN-MTt" firstAttribute="bottom" secondItem="BjK-ST-6iY" secondAttribute="bottom" constant="24" id="611-ZN-3Oh"/>
+                <constraint firstAttribute="bottom" secondItem="BjK-ST-6iY" secondAttribute="bottom" id="611-ZN-3Oh"/>
                 <constraint firstItem="BjK-ST-6iY" firstAttribute="top" secondItem="jsl-CN-MTt" secondAttribute="top" constant="8" id="9LA-Hm-Fc0"/>
                 <constraint firstAttribute="trailing" secondItem="9LW-yB-0lC" secondAttribute="trailing" id="OCP-gl-Y59"/>
                 <constraint firstItem="BjK-ST-6iY" firstAttribute="leading" secondItem="GQq-kM-FRy" secondAttribute="leading" constant="32" id="aD2-IT-PE0"/>
@@ -264,6 +264,7 @@
                 <outlet property="episodeImageView" destination="gtY-Q3-ge8" id="RSw-G8-1jx"/>
                 <outlet property="episodeTitleLabel" destination="BTl-bC-wxP" id="k4b-iN-6MV"/>
                 <outlet property="fullSizeView" destination="BjK-ST-6iY" id="zi7-2Q-xxL"/>
+                <outlet property="fullSizeViewBottomToSuperViewBottom" destination="611-ZN-3Oh" id="rpL-Dk-kzV"/>
                 <outlet property="miniEpisodeImageView" destination="ZFc-yN-7ly" id="HWd-xu-m6a"/>
                 <outlet property="miniEpisodeTitleLabel" destination="xXV-AS-0r6" id="seE-ow-el4"/>
                 <outlet property="miniPlayButton" destination="yfo-tb-LPu" id="LAG-KL-ctu"/>
