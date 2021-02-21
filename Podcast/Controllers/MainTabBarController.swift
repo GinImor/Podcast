@@ -92,12 +92,11 @@ class MainTabBarController: UITabBarController {
         return
       }
       
-      playerViewTopToSuperViewBottomConstraint.constant = initialConstantY + translationY
+      episodePlayerView.transform = CGAffineTransform(translationX: 0, y: translationY)
       
       episodePlayerView.miniView.alpha = isMiniPlayerView ? 1 - percentage : percentage
       episodePlayerView.fullSizeView.alpha = isMiniPlayerView ? percentage : 1 - percentage
     case .ended:
-
       let velocityY = pan.velocity(in: self.view).y
       
       if isMiniPlayerView && (velocityY < -500 || rawPercentage < -0.5) {
@@ -134,14 +133,10 @@ class MainTabBarController: UITabBarController {
       initialSpringVelocity: 0.0,
       options: .curveEaseOut,
       animations: {
-        if expanding {
-          self.view.layoutIfNeeded()
-          self.tabBar.alpha = 0.0
-        } else {
-          // because playerView layout rely on tabBar, so need to put tabBar in place first
-          self.tabBar.alpha = 1.0
-          self.view.layoutIfNeeded()
-        }
+        self.view.layoutIfNeeded()
+        self.episodePlayerView.transform = .identity
+        
+        self.tabBar.alpha = expanding ? 0.0 : 1.0
         self.episodePlayerView.miniView.alpha = expanding ? 0.0 : 1.0
         self.episodePlayerView.fullSizeView.alpha = expanding ? 1.0 : 0.0
       }
