@@ -16,18 +16,52 @@ class EpisodePlayerView: UIView {
     Bundle.main.loadNibNamed("EpisodePlayerView", owner: nil, options: nil)?.first as! EpisodePlayerView
   }()
   
+  private let episodePlayer: AVPlayer = {
+    let player = AVPlayer()
+    return player
+  }()
+  
+  /// Delegation
   var willDismiss: (() -> Void)?
   var willPopulateWithEpisode: ((Episode) -> Void)?
   
+  /// Factor that decide whether or not perfom animation
   var didEnterBackground: Bool = false
-
+  
+  ///Display Content
+  var episode: Episode! {
+    didSet {
+      setupTimeObserver()
+      
+      elapsedTimeLabel.text = "00:00:00"
+      totalTimeLabel.text = "--:--:--"
+      timeControlSlider.value = 0
+      
+      episodeTitleLabel.text = episode.title
+      miniEpisodeTitleLabel.text = episode.title
+      authorLabel.text = episode.author
+      
+      setupNowPlayingInfoTitle()
+      
+      let imageURL = URL(string: episode.imageUrl)
+      episodeImageView.sd_setImage(with: imageURL)
+      miniEpisodeImageView.sd_setImage(with: imageURL) { (image, _, _, _) in
+        self.setupNowPlayingInfoImage(image)
+      }
+      
+      playEpisode(episode)
+    }
+  }
+  
+  
+  // MARK: - IBOutlet
+  
   @IBOutlet weak var miniView: UIView!
   @IBOutlet weak var fullSizeView: UIStackView!
   
   @IBOutlet weak var miniEpisodeImageView: UIImageView!
   @IBOutlet weak var miniEpisodeTitleLabel: UILabel!
   @IBOutlet weak var miniPlayButton: UIButton!
-  
   
   @IBOutlet weak var episodeImageView: UIImageView! {
     didSet {
@@ -54,22 +88,30 @@ class EpisodePlayerView: UIView {
     let seekFloatTime = Float64(percentage) * episodePlayer.currentItem!.duration.preciseSec
     let seekCMTime = CMTimeMakeWithSeconds(seekFloatTime, preferredTimescale: 1)
     episodePlayer.seek(to: seekCMTime)
-    self.setupLockScreenPlayElapsedTime()
   }
-  @IBAction func timeControlDown(_ sender: Any) { playerSwitchToPaused() }
-  @IBAction func timeControlUpInside(_ sender: Any) { playerSwitchToPlay() }
-  @IBAction func timeControlUpOutside(_ sender: Any) { playerSwitchToPlay() }
+  @IBAction func timeControlDown(_ sender: Any) { playerSwitchToPlay(false) }
+  @IBAction func timeControlUpInside(_ sender: Any) { playerSwitchToPlay(true) }
+  @IBAction func timeControlUpOutside(_ sender: Any) { playerSwitchToPlay(true) }
   
   @IBAction func goBacward(_ sender: Any) { goBy(delta: -15) }
   
   // notice player status will change without notice
   @IBAction func playOrPause(_ sender: Any? = nil) {
-    if episodePlayer.timeControlStatus == .paused {
-      playerSwitchToPlay()
+    if episodePlayer.timeControlStatus == .playing {
+      playerSwitchToPlay(false)
     } else {
-      playerSwitchToPaused()
+      playerSwitchToPlay(true)
     }
   }
+  
+  @IBAction func goForward(_ sender: Any) { goBy(delta: 15) }
+  
+  @IBAction func minimizeVolume(_ sender: Any) { volumeChangeTo(0.0) }
+  @IBAction func volumeChanged(_ sender: Any) { volumeChangeTo(volumeSlider.value) }
+  @IBAction func maximizeVolume(_ sender: Any) { volumeChangeTo(1.0) }
+  
+  
+  // MARK: - View Life Cycle
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -77,7 +119,28 @@ class EpisodePlayerView: UIView {
     miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
     setupAudioSession()
     setupPlayPauseCommand()
+    observePlayerControlState()
   }
+  
+  
+  // MARK: - KVO
+  
+  private func observePlayerControlState() {
+    episodePlayer.addObserver(self, forKeyPath: "timeControlStatus", options: .new, context: nil)
+    episodePlayer.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    if keyPath == "timeControlStatus" {
+      setEnvironmentAccordingly()
+      print("controlStatus:", episodePlayer.timeControlStatus.rawValue)
+    } else if keyPath == "rate" {
+      print("rate:", episodePlayer.rate)
+    }
+  }
+  
+  
+  // MARK: - Background Mode
   
   private func setupAudioSession() {
     do {
@@ -88,6 +151,9 @@ class EpisodePlayerView: UIView {
     }
   }
   
+  
+  // MARK: - Remote Command Center
+  
   private func setupPlayPauseCommand() {
     let remoteCommandCenter = MPRemoteCommandCenter.shared()
     
@@ -95,23 +161,102 @@ class EpisodePlayerView: UIView {
     
     remoteCommandCenter.playCommand.isEnabled = true
     remoteCommandCenter.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
-      self.playerSwitchToPlay()
-      self.setupLockScreenPlayElapsedTime()
+      self.playerSwitchToPlay(true)
       return .success
     }
     
     remoteCommandCenter.pauseCommand.isEnabled = true
     remoteCommandCenter.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
-      self.playerSwitchToPaused()
-      self.setupLockScreenPlayElapsedTime()
+      self.playerSwitchToPlay(false)
       return .success
     }
     
     remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
     remoteCommandCenter.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
       self.playOrPause()
-      self.setupLockScreenPlayElapsedTime()
       return .success
+    }
+  }
+  
+  
+  // MARK: - Now Playing Info
+  
+  private var nowPlayingInfo: [String: Any]! {
+    get { MPNowPlayingInfoCenter.default().nowPlayingInfo}
+    set {
+      MPNowPlayingInfoCenter.default().nowPlayingInfo = newValue
+    }
+  }
+  
+  private func setupNowPlayingInfoTitle() {
+    var nowPlayingInfo = [String: Any]()
+    
+    nowPlayingInfo[MPMediaItemPropertyTitle] = episode.title
+    nowPlayingInfo[MPMediaItemPropertyArtist] = episode.author
+    
+    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+  }
+   
+  private func setupNowPlayingInfoImage(_ image: UIImage?) {
+    if let image = image {
+      let itemArtwork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
+        image
+      }
+      nowPlayingInfo[MPMediaItemPropertyArtwork] = itemArtwork
+    }
+  }
+  
+  private func setupLockScreenPlayDuration() {
+    guard let currentItem = episodePlayer.currentItem else { return }
+    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = currentItem.duration.preciseSec
+  }
+  
+  private func setupLockScreenPlayElapsedTime() {
+    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = episodePlayer.currentTime().preciseSec
+    print(episodePlayer.currentTime().preciseSec)
+  }
+   
+  
+  // MARK: - Play Control
+  
+  /// initial play
+  private func playEpisode(_ episode: Episode) {
+    setPlayButtonImage(named: "pause")
+    guard let audioUrl = URL(string: episode.audioUrl) else { return }
+    
+    let playerItem = AVPlayerItem(url: audioUrl)
+    episodePlayer.replaceCurrentItem(with: playerItem)
+    episodePlayer.automaticallyWaitsToMinimizeStalling = true
+    episodePlayer.play()
+  }
+  
+  private func playerSwitchToPlay(_ play: Bool) {
+    play ? episodePlayer.play() : episodePlayer.pause()
+    setEnvironmentAccordingly()
+  }
+
+  private func setEnvironmentAccordingly() {
+    setPlayButtonAndImageViewAccordingly()
+    setNowPlayingPlayback()
+  }
+  
+  private func setPlayButtonAndImageViewAccordingly() {
+    if episodePlayer.timeControlStatus != .paused  {
+      setPlayButtonImage(named: "pause")
+      animateEpisodeImageView(shrink: false)
+
+    } else {
+      setPlayButtonImage(named: "play")
+      animateEpisodeImageView(shrink: true)
+    }
+  }
+  
+  private func setNowPlayingPlayback() {
+    setupLockScreenPlayElapsedTime()
+    if episodePlayer.timeControlStatus == .playing {
+      nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
+    } else {
+      nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 0.0
     }
   }
   
@@ -119,68 +264,10 @@ class EpisodePlayerView: UIView {
     playButton.setImage(UIImage(systemName: named), for: .normal)
     miniPlayButton.setImage(UIImage(systemName: named), for: .normal)
   }
+
+
   
-  private func playerSwitchToPlay() {
-    episodePlayer.play()
-    setPlayButtonImage(named: "pause")
-    animateEpisodeImageView(shrink: false)
-  }
-  
-  private func playerSwitchToPaused() {
-    episodePlayer.pause()
-    setPlayButtonImage(named: "play")
-    animateEpisodeImageView(shrink: true)
-  }
-  
-  @IBAction func goForward(_ sender: Any) { goBy(delta: 15) }
-  
-  @IBAction func minimizeVolume(_ sender: Any) { volumeChangeTo(0.0) }
-  @IBAction func volumeChanged(_ sender: Any) { volumeChangeTo(volumeSlider.value) }
-  @IBAction func maximizeVolume(_ sender: Any) { volumeChangeTo(1.0) }
-  
-  var episode: Episode! {
-    didSet {
-      setupTimeObserver()
-      
-      elapsedTimeLabel.text = "00:00:00"
-      totalTimeLabel.text = "--:--:--"
-      timeControlSlider.value = 0
-      
-      episodeTitleLabel.text = episode.title
-      miniEpisodeTitleLabel.text = episode.title
-      authorLabel.text = episode.author
-      
-      let imageURL = URL(string: episode.imageUrl)
-      episodeImageView.sd_setImage(with: imageURL)
-      miniEpisodeImageView.sd_setImage(with: imageURL) { (image, _, _, _) in
-        self.setupNowPlayingInfo(image: image)
-      }
-      
-      
-      playEpisode(episode)
-    }
-  }
-  
-  private func setupNowPlayingInfo(image: UIImage?) {
-    var nowPlayingInfo = [String: Any]()
-    
-    nowPlayingInfo[MPMediaItemPropertyTitle] = episode.title
-    nowPlayingInfo[MPMediaItemPropertyArtist] = episode.author
-    
-    if let image = image {
-      let itemArtwork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
-        image
-      }
-      nowPlayingInfo[MPMediaItemPropertyArtwork] = itemArtwork
-    }
-    
-    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-  }
-  
-  let episodePlayer: AVPlayer = {
-    let player = AVPlayer()
-    return player
-  }()
+  // MARK: - Time Observer
   
   var boundaryTimeObserver: Any?
   var periodicTimeObserver: Any?
@@ -206,7 +293,7 @@ class EpisodePlayerView: UIView {
       self.animateEpisodeImageView(shrink: false)
       self.totalTimeLabel.text = self.episodePlayer.currentItem?.duration.toTimeString()
       self.setupLockScreenPlayDuration()
-      self.setupLockScreenPlayElapsedTime()
+//      self.setupLockScreenPlayElapsedTime()
     }
   }
   
@@ -231,40 +318,22 @@ class EpisodePlayerView: UIView {
     self.periodicTimeObserver = nil
   }
   
-  var nowPlayingInfo: [String: Any]? {
-    get { MPNowPlayingInfoCenter.default().nowPlayingInfo}
-    set {
-      MPNowPlayingInfoCenter.default().nowPlayingInfo = newValue
-    }
-  }
-  
-  func setupLockScreenPlayDuration() {
-    guard let currentItem = episodePlayer.currentItem else { return }
-    nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = currentItem.duration.preciseSec
-  }
-  
-  func setupLockScreenPlayElapsedTime() {
-    nowPlayingInfo?[MPNowPlayingInfoPropertyElapsedPlaybackTime] = episodePlayer.currentTime().preciseSec
-  }
-  
-  private func playEpisode(_ episode: Episode) {
-    setPlayButtonImage(named: "pause")
-    guard let audioUrl = URL(string: episode.audioUrl) else { return }
-    
-    let playerItem = AVPlayerItem(url: audioUrl)
-    episodePlayer.replaceCurrentItem(with: playerItem)
-    episodePlayer.automaticallyWaitsToMinimizeStalling = false
-    episodePlayer.play()
-  }
+ 
+  // MARK: - Episode Image View Shrink Effect
   
   private var shrinkScale: CGFloat { 0.8 }
-  
+
   private func shrinkEpisodeImageView() {
     episodeImageView.transform = CGAffineTransform(scaleX: shrinkScale, y: shrinkScale)
   }
   
   private func unshrinkEpisodeImageView() {
     episodeImageView.transform = .identity
+  }
+  
+  private func shrinkEpisodeImageView(_ shrink: Bool) {
+    if shrink { self.shrinkEpisodeImageView() }
+    else { self.unshrinkEpisodeImageView() }
   }
   
   private func animateEpisodeImageView(shrink: Bool) {
@@ -287,16 +356,16 @@ class EpisodePlayerView: UIView {
     }
   }
   
-  private func shrinkEpisodeImageView(_ shrink: Bool) {
-    if shrink { self.shrinkEpisodeImageView() }
-    else { self.unshrinkEpisodeImageView() }
-  }
+  
+  // MARK: - Go Forward or Backward
   
   private func goBy(delta: Float64) {
     let seekCMTime = episodePlayer.currentTime() + CMTimeMakeWithSeconds(delta, preferredTimescale: 1)
     episodePlayer.seek(to: seekCMTime)
   }
   
+  
+  // MARK: - Volume Control
   private func volumeChangeTo(_ volume: Float) {
     episodePlayer.volume = volume
     volumeSlider.value = volume
