@@ -38,8 +38,6 @@ class PodcastSearchController: UITableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     let searchBarTextField = searchController.searchBar.searchTextField
     
-    navigationItem.hidesSearchBarWhenScrolling = false
-    
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.delegate = self
     

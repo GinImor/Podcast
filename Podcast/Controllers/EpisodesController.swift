@@ -60,6 +60,7 @@ class EpisodesController: UITableViewController {
   
   private func setupBarAppearance() {
     navigationItem.title = podcast?.trackName
+    navigationItem.largeTitleDisplayMode = .never
   }
   
   private func setupTableView() {
