@@ -89,6 +89,6 @@ class EpisodesController: UITableViewController {
     let episodePlayerView = EpisodePlayerView.shared
     let episode = episodes[indexPath.row]
     
-    episodePlayerView.willPopulateWithEpisode?(episode)
+    episodePlayerView.willPopulateWithEpisode?(episode, episodes)
   }
 }

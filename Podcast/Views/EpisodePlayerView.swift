@@ -25,10 +25,12 @@ class EpisodePlayerView: UIView {
   
   /// Delegation
   var willDismiss: (() -> Void)?
-  var willPopulateWithEpisode: ((Episode) -> Void)?
+  var willPopulateWithEpisode: ((Episode, [Episode]) -> Void)?
   
   /// Factor that decide whether or not perfom animation
   var didEnterBackground: Bool = false
+  
+  var episodes: [Episode] = []
   
   ///Display Content
   var episode: Episode! {
@@ -120,7 +122,7 @@ class EpisodePlayerView: UIView {
     
     miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
     setupAudioSession()
-    setupPlayPauseCommand()
+    setupRemoteCommand()
     observePlayerControlState()
   }
   
@@ -156,7 +158,7 @@ class EpisodePlayerView: UIView {
   
   // MARK: - Remote Command Center
   
-  private func setupPlayPauseCommand() {
+  private func setupRemoteCommand() {
     let remoteCommandCenter = MPRemoteCommandCenter.shared()
     
     UIApplication.shared.beginReceivingRemoteControlEvents()
@@ -178,8 +180,32 @@ class EpisodePlayerView: UIView {
       self.playOrPause()
       return .success
     }
+    
+    remoteCommandCenter.nextTrackCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+      self.jumpTrackBy(+1)
+      return .success
+    }
+    
+    remoteCommandCenter.previousTrackCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+      self.jumpTrackBy(-1)
+      return .success
+    }
   }
   
+  @objc private func jumpTrackBy(_ step: Int) {
+    guard var currentEpisodeIndex = episodes.firstIndex(of: episode) else { return }
+    let tempEpisodeIndex = currentEpisodeIndex + step
+    
+    if tempEpisodeIndex < 0 {
+      currentEpisodeIndex = episodes.count - 1
+    } else if tempEpisodeIndex > episodes.count - 1 {
+      currentEpisodeIndex = 0
+    } else {
+      currentEpisodeIndex = tempEpisodeIndex
+    }
+    
+    episode = episodes[currentEpisodeIndex]
+  }
   
   // MARK: - Now Playing Info
   

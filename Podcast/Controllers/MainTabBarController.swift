@@ -65,10 +65,14 @@ class MainTabBarController: UITabBarController {
     episodePlayerView.willDismiss = { [unowned self] in
       self.narrowPlayerViewAboveTabBar()
     }
-    episodePlayerView.willPopulateWithEpisode = { [unowned self] (episode) in
+    episodePlayerView.willPopulateWithEpisode = { [unowned self] (episode, episodes) in
       if self.episodePlayerView.episode != episode {
         self.episodePlayerView.episode = episode
       }
+      // while palying current episode, the user maybe exit the EpisodesController
+      // and back again, and the podcast may updated, so no matter the user chosen
+      // the same episodes or not, need to update the episodes
+      self.episodePlayerView.episodes = episodes
       self.expandPlayerViewToTop()
     }
   }
