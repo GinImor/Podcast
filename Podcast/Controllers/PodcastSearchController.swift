@@ -9,11 +9,6 @@
 import UIKit
 import Alamofire
 
-enum CellID {
-  static let podcast = "PodcastCell"
-  static let episode = "EpisodeCell"
-}
-
 class PodcastSearchController: UITableViewController {
   
   var podcasts: [Podcast] = []

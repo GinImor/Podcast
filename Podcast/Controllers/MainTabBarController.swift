@@ -33,13 +33,13 @@ class MainTabBarController: UITabBarController {
   }
   
   private func setupChileVCs() {
-    let favorites = ViewController()
+    let favorites = FavoriteController(collectionViewLayout: UICollectionViewFlowLayout())
     let search = PodcastSearchController()
     let downloads = ViewController()
     
     viewControllers = [
-      search.wrapInNav(tabBarTitle: "Search", tabBarImage: #imageLiteral(resourceName: "search")),
       favorites.wrapInNav(tabBarTitle: "Favourites", tabBarImage: #imageLiteral(resourceName: "favorites")),
+      search.wrapInNav(tabBarTitle: "Search", tabBarImage: #imageLiteral(resourceName: "search")),
       downloads.wrapInNav(tabBarTitle: "Downloads", tabBarImage: #imageLiteral(resourceName: "downloads"))
     ]
   }

@@ -15,6 +15,10 @@
 		DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913825D8CFF800B6EB85 /* Assets.xcassets */; };
 		DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */; };
 		DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */; };
+		DC60BE3B25E35CB3001EF9A4 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3A25E35CB3001EF9A4 /* FavoriteController.swift */; };
+		DC60BE3D25E35D5E001EF9A4 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3C25E35D5D001EF9A4 /* CellID.swift */; };
+		DC60BE3F25E363E5001EF9A4 /* FavoritePodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */; };
+		DC60BE4125E3663E001EF9A4 /* UIStackView+verticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */; };
 		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
@@ -33,7 +37,7 @@
 		DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */; };
 		DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */; };
 		DCECAA9825DCB559000AD716 /* EpisodePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */; };
-		DCF0417725DE7F4A00AB8E50 /* UIView+tAMIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */; };
+		DCF0417725DE7F4A00AB8E50 /* UIView+layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +53,10 @@
 		DC4E913B25D8CFF800B6EB85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC4E913D25D8CFF800B6EB85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+onesideBorder.swift"; sourceTree = "<group>"; };
+		DC60BE3A25E35CB3001EF9A4 /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
+		DC60BE3C25E35D5D001EF9A4 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
+		DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePodcastCell.swift; sourceTree = "<group>"; };
+		DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+verticalStackView.swift"; sourceTree = "<group>"; };
 		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
@@ -67,7 +75,7 @@
 		DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+predefinedColor.swift"; sourceTree = "<group>"; };
 		DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
 		DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodePlayerView.xib; sourceTree = "<group>"; };
-		DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+tAMIC.swift"; sourceTree = "<group>"; };
+		DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+layout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 		DC4E914325D8F92300B6EB85 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DC60BE3C25E35D5D001EF9A4 /* CellID.swift */,
 				DC4E912F25D8CFF600B6EB85 /* AppDelegate.swift */,
 				DC4E913125D8CFF600B6EB85 /* SceneDelegate.swift */,
 				DC4E913825D8CFF800B6EB85 /* Assets.xcassets */,
@@ -147,13 +156,14 @@
 		DC70CE0E25D922BE00F2C169 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DCF0417625DE7F4A00AB8E50 /* UIView+tAMIC.swift */,
+				DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */,
+				DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */,
+				DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */,
 				DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */,
 				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
 				DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */,
 				DCA73FC325DC9FA9008B64D4 /* String+httpTransformToHttps.swift */,
 				DC7B420225DD68440014684F /* CMTime+utility.swift */,
-				DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -164,6 +174,7 @@
 				DC70CE0825D9084400F2C169 /* MainTabBarController.swift */,
 				DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */,
 				DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */,
+				DC60BE3A25E35CB3001EF9A4 /* FavoriteController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 				DCBA719D25DBFDC0004E081C /* EpisodeCell.xib */,
 				DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */,
 				DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */,
+				DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,25 +329,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC60BE3D25E35D5E001EF9A4 /* CellID.swift in Sources */,
 				DCA73FC425DC9FA9008B64D4 /* String+httpTransformToHttps.swift in Sources */,
 				DCBA719B25DBFD82004E081C /* DateFormatter+customInstance.swift in Sources */,
 				DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */,
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DCDCF1CC25DA8A2A007D7BFC /* PodcastCell.swift in Sources */,
-				DCF0417725DE7F4A00AB8E50 /* UIView+tAMIC.swift in Sources */,
+				DCF0417725DE7F4A00AB8E50 /* UIView+layout.swift in Sources */,
 				DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */,
 				DC7B420325DD68440014684F /* CMTime+utility.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
+				DC60BE3B25E35CB3001EF9A4 /* FavoriteController.swift in Sources */,
 				DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */,
 				DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */,
 				DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */,
 				DCBA719E25DBFDC0004E081C /* EpisodeCell.swift in Sources */,
+				DC60BE4125E3663E001EF9A4 /* UIStackView+verticalStackView.swift in Sources */,
 				DC4E913025D8CFF600B6EB85 /* AppDelegate.swift in Sources */,
 				DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */,
+				DC60BE3F25E363E5001EF9A4 /* FavoritePodcastCell.swift in Sources */,
 				DC4E913225D8CFF600B6EB85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
