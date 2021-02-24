@@ -124,6 +124,7 @@ class EpisodePlayerView: UIView {
     setupAudioSession()
     setupRemoteCommand()
     observePlayerControlState()
+    setupNotifications()
   }
   
   
@@ -143,6 +144,35 @@ class EpisodePlayerView: UIView {
     }
   }
   
+  // MARK: - Notification
+  
+  private func setupNotifications() {
+    let nc = NotificationCenter.default
+    nc.addObserver(self,
+                   selector: #selector(handleInterruption),
+                   name: AVAudioSession.interruptionNotification,
+                   object: nil)
+  }
+
+  @objc func handleInterruption(notification: Notification) {
+    guard let userInfo = notification.userInfo,
+        let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+        let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+    }
+    switch type {
+    case .began:
+      break
+    case .ended:
+      guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+      let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+      if options.contains(.shouldResume) {
+        playerSwitchToPlay(true)
+      } else {
+      }
+    default: ()
+    }
+  }
   
   // MARK: - Background Mode
   
@@ -264,15 +294,14 @@ class EpisodePlayerView: UIView {
   }
 
   private func setEnvironmentAccordingly() {
-    setPlayButtonAndImageViewAccordingly()
     setNowPlayingPlayback()
+    setPlayButtonAndImageViewAccordingly()
   }
   
   private func setPlayButtonAndImageViewAccordingly() {
     if episodePlayer.timeControlStatus != .paused  {
       setPlayButtonImage(named: "pause")
       animateEpisodeImageView(shrink: false)
-
     } else {
       setPlayButtonImage(named: "play")
       animateEpisodeImageView(shrink: true)
@@ -321,7 +350,6 @@ class EpisodePlayerView: UIView {
       self.animateEpisodeImageView(shrink: false)
       self.totalTimeLabel.text = self.episodePlayer.currentItem?.duration.toTimeString()
       self.setupLockScreenPlayDuration()
-//      self.setupLockScreenPlayElapsedTime()
     }
   }
   
