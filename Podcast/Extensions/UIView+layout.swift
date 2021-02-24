@@ -24,18 +24,33 @@ extension UIView {
   /// Creates a new instance of the receiver class, configured for use with Auto Layout.
   /// - Returns: An instance of the receiver class.
   public static func autolayoutNew() -> Self {
-      let view = self.init(frame: .zero)
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
+    let view = self.init(frame: .zero)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
   }
   
   func pinToSuperviewEdges() {
-      guard let superview = superview else { return }
-      NSLayoutConstraint.activate([
-          topAnchor.constraint(equalTo: superview.topAnchor),
-          leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-          trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-          bottomAnchor.constraint(equalTo: superview.bottomAnchor)
-      ])
+    guard let superview = superview else { return }
+    disableTAMIC()
+    NSLayoutConstraint.activate([
+      topAnchor.constraint(equalTo: superview.topAnchor),
+      leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+      trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+      bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+    ])
+  }
+  
+  func centerToSuperviewSafeAreaLayoutGuide() {
+    guard let superview = superview else { return }
+    disableTAMIC()
+    NSLayoutConstraint.activate([
+      centerXAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerXAnchor),
+      centerYAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.centerYAnchor)
+    ])
+  }
+  
+  func centerToSuperviewSafeAreaLayoutGuide(superview: UIView) {
+    superview.addSubview(self)
+    centerToSuperviewSafeAreaLayoutGuide()
   }
 }

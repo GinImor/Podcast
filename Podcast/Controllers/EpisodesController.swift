@@ -48,14 +48,11 @@ class EpisodesController: UITableViewController {
   
   private func setupActivityIndicator() {
     activityIndicator = UIActivityIndicatorView(style: .large)
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    
-    let navView = self.navigationController!.view!
-    navView.addSubview(activityIndicator)
-    NSLayoutConstraint.activate([
-      activityIndicator.centerXAnchor.constraint(equalTo: navView.centerXAnchor),
-      activityIndicator.centerYAnchor.constraint(equalTo: navView.centerYAnchor)
-    ])
+    // table view coordinate space origin isn't its bounds origin
+    // right below the navigation bar, table view content positioned
+    // relative to the coordinate space, so center to table view result
+    // in below the believed position
+    activityIndicator.centerToSuperviewSafeAreaLayoutGuide(superview: tableView)
   }
   
   private func setupBarAppearance() {
