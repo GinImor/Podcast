@@ -101,10 +101,10 @@ class EpisodePlayerView: UIView {
   
   // notice player status will change without notice
   @IBAction func playOrPause(_ sender: Any? = nil) {
-    if episodePlayer.timeControlStatus == .playing {
-      playerSwitchToPlay(false)
-    } else {
+    if episodePlayer.timeControlStatus == .paused {
       playerSwitchToPlay(true)
+    } else {
+      playerSwitchToPlay(false)
     }
   }
   
