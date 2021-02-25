@@ -12,8 +12,6 @@ import MediaPlayer
 
 class EpisodePlayerView: UIView {
   
-  @IBOutlet weak var fullSizeViewBottomToSuperViewBottom: NSLayoutConstraint!
-  
   static var shared: EpisodePlayerView = {
     Bundle.main.loadNibNamed("EpisodePlayerView", owner: nil, options: nil)?.first as! EpisodePlayerView
   }()
@@ -67,13 +65,7 @@ class EpisodePlayerView: UIView {
   @IBOutlet weak var miniEpisodeTitleLabel: UILabel!
   @IBOutlet weak var miniPlayButton: UIButton!
   
-  @IBOutlet weak var episodeImageView: UIImageView! {
-    didSet {
-      episodeImageView.layer.cornerRadius = episodeImageView.bounds.width * 0.05
-      episodeImageView.layer.masksToBounds = true
-      shrinkEpisodeImageView()
-    }
-  }
+  @IBOutlet weak var episodeImageView: UIImageView!
   
   @IBOutlet weak var timeControlSlider: UISlider!
   @IBOutlet weak var elapsedTimeLabel: UILabel!
@@ -81,7 +73,11 @@ class EpisodePlayerView: UIView {
   @IBOutlet weak var episodeTitleLabel: UILabel!
   @IBOutlet weak var authorLabel: UILabel!
   @IBOutlet weak var playButton: UIButton!
+  @IBOutlet weak var muteVolumeButton: UIButton!
   @IBOutlet weak var volumeSlider: UISlider!
+  @IBOutlet weak var fullVolumeButton: UIButton!
+  
+  @IBOutlet weak var fullSizeViewBottomToSuperViewBottom: NSLayoutConstraint!
   
   @IBAction func dismiss(_ sender: Any) {
     willDismiss?()
@@ -120,7 +116,7 @@ class EpisodePlayerView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
+    setupBasicAppearance()
     setupAudioSession()
     setupRemoteCommand()
     observePlayerControlState()
@@ -128,6 +124,17 @@ class EpisodePlayerView: UIView {
   }
   
   
+  // MARK: - Basic Appearance Set Up
+  
+  private func setupBasicAppearance() {
+    miniView.addTopBorder(withColor: .lightGray, borderWidth: 0.5)
+    if UIScreen.main.bounds.height > 700 {
+      episodeTitleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+    }
+    authorLabel.textColor = .primaryColor
+    muteVolumeButton.tintColor = .primaryColor
+    fullVolumeButton.tintColor = .primaryColor
+  }
   // MARK: - KVO
   
   private func observePlayerControlState() {
@@ -279,7 +286,6 @@ class EpisodePlayerView: UIView {
   
   /// initial play
   private func playEpisode(_ episode: Episode) {
-    setPlayButtonImage(named: "pause")
     guard let audioUrl = URL(string: episode.audioUrl) else { return }
     
     let playerItem = AVPlayerItem(url: audioUrl)
@@ -318,10 +324,10 @@ class EpisodePlayerView: UIView {
   }
   
   private func setPlayButtonImage(named: String) {
-    playButton.setImage(UIImage(systemName: named), for: .normal)
-    miniPlayButton.setImage(UIImage(systemName: named), for: .normal)
+    let image = UIImage(systemName: named)
+    playButton.setImage(image, for: .normal)
+    miniPlayButton.setImage(image, for: .normal)
   }
-
 
   
   // MARK: - Time Observer

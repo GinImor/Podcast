@@ -19,7 +19,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="v8Y-Kf-Ub1">
                         <rect key="frame" x="28" y="19" width="385" height="241"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="6vL-j6-D26">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="6vL-j6-D26" customClass="RoundedCornerImageView" customModule="Podcast" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="70.5" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="X5h-dY-tsA"/>

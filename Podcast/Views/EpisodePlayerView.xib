@@ -20,7 +20,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7gy-4O-Wur">
                             <rect key="frame" x="20" y="0.0" width="335" height="64"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="ZFc-yN-7ly">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="ZFc-yN-7ly" customClass="RoundedCornerImageView" customModule="Podcast" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="6.3333333333333321" width="51.333333333333336" height="51.333333333333343"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ZFc-yN-7ly" secondAttribute="height" multiplier="1:1" id="uM8-Be-e8u"/>
@@ -81,7 +81,7 @@
                                 <action selector="dismiss:" destination="GQq-kM-FRy" eventType="touchUpInside" id="zB2-AR-DxK"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="gtY-Q3-ge8">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="gtY-Q3-ge8" customClass="RoundedCornerImageView" customModule="Podcast" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="38" width="311" height="311"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="gtY-Q3-ge8" secondAttribute="height" multiplier="1:1" id="MOg-EO-Gir"/>
@@ -166,7 +166,7 @@
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <state key="normal" image="pause" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 </preferredSymbolConfiguration>
                                             </state>
                                             <connections>
@@ -265,10 +265,12 @@
                 <outlet property="episodeTitleLabel" destination="BTl-bC-wxP" id="k4b-iN-6MV"/>
                 <outlet property="fullSizeView" destination="BjK-ST-6iY" id="zi7-2Q-xxL"/>
                 <outlet property="fullSizeViewBottomToSuperViewBottom" destination="611-ZN-3Oh" id="rpL-Dk-kzV"/>
+                <outlet property="fullVolumeButton" destination="qre-aP-vaP" id="PoZ-18-6U5"/>
                 <outlet property="miniEpisodeImageView" destination="ZFc-yN-7ly" id="HWd-xu-m6a"/>
                 <outlet property="miniEpisodeTitleLabel" destination="xXV-AS-0r6" id="seE-ow-el4"/>
                 <outlet property="miniPlayButton" destination="yfo-tb-LPu" id="LAG-KL-ctu"/>
                 <outlet property="miniView" destination="9LW-yB-0lC" id="Hzr-cZ-ouy"/>
+                <outlet property="muteVolumeButton" destination="8ol-GC-Xlg" id="Nyu-wq-9UL"/>
                 <outlet property="playButton" destination="Hpb-kg-59P" id="qBI-XQ-svk"/>
                 <outlet property="timeControlSlider" destination="FhW-zT-Daa" id="47y-ga-xxk"/>
                 <outlet property="totalTimeLabel" destination="1tW-Bf-ZQy" id="FEs-RY-2Dn"/>

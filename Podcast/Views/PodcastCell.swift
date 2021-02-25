@@ -14,7 +14,9 @@ class PodcastCell: UITableViewCell {
   @IBOutlet weak var podcastImageView: UIImageView!
   @IBOutlet weak var trackNameLabel: UILabel!
   @IBOutlet weak var artistNameLabel: UILabel!
-  @IBOutlet weak var episodeCountLabel: UILabel!
+  @IBOutlet weak var episodeCountLabel: UILabel! {
+    didSet { episodeCountLabel.textColor = .primaryColor }
+  }
   
   var podcast: Podcast! {
     didSet {

@@ -35,6 +35,8 @@
 		DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */; };
 		DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1CF25DABFEA007D7BFC /* Episode.swift */; };
 		DCDCF1D225DAC5E2007D7BFC /* UIColor+predefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */; };
+		DCE22E6C25E696AF00A0B92C /* UIView+cornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE22E6B25E696AF00A0B92C /* UIView+cornerRadius.swift */; };
+		DCE22E6E25E69A1300A0B92C /* RoundedCornerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE22E6D25E69A1300A0B92C /* RoundedCornerImageView.swift */; };
 		DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */; };
 		DCECAA9825DCB559000AD716 /* EpisodePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */; };
 		DCF0417725DE7F4A00AB8E50 /* UIView+layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */; };
@@ -73,6 +75,8 @@
 		DCDCF1CD25DABFB6007D7BFC /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
 		DCDCF1CF25DABFEA007D7BFC /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		DCDCF1D125DAC5E2007D7BFC /* UIColor+predefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+predefinedColor.swift"; sourceTree = "<group>"; };
+		DCE22E6B25E696AF00A0B92C /* UIView+cornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+cornerRadius.swift"; sourceTree = "<group>"; };
+		DCE22E6D25E69A1300A0B92C /* RoundedCornerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerImageView.swift; sourceTree = "<group>"; };
 		DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
 		DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodePlayerView.xib; sourceTree = "<group>"; };
 		DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+layout.swift"; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 			children = (
 				DCF0417625DE7F4A00AB8E50 /* UIView+layout.swift */,
 				DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */,
+				DCE22E6B25E696AF00A0B92C /* UIView+cornerRadius.swift */,
 				DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */,
 				DCBA719A25DBFD82004E081C /* DateFormatter+customInstance.swift */,
 				DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */,
@@ -207,6 +212,7 @@
 				DCECAA9525DCB54F000AD716 /* EpisodePlayerView.swift */,
 				DCECAA9725DCB559000AD716 /* EpisodePlayerView.xib */,
 				DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */,
+				DCE22E6D25E69A1300A0B92C /* RoundedCornerImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 				DCA73FC425DC9FA9008B64D4 /* String+httpTransformToHttps.swift in Sources */,
 				DCBA719B25DBFD82004E081C /* DateFormatter+customInstance.swift in Sources */,
 				DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */,
+				DCE22E6C25E696AF00A0B92C /* UIView+cornerRadius.swift in Sources */,
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,
 				DCDCF1CC25DA8A2A007D7BFC /* PodcastCell.swift in Sources */,
@@ -343,6 +350,7 @@
 				DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
+				DCE22E6E25E69A1300A0B92C /* RoundedCornerImageView.swift in Sources */,
 				DC60BE3B25E35CB3001EF9A4 /* FavoriteController.swift in Sources */,
 				DCECAA9625DCB54F000AD716 /* EpisodePlayerView.swift in Sources */,
 				DCDCF1C425DA59C5007D7BFC /* PodcastSearchResults.swift in Sources */,

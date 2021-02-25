@@ -19,16 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func setupNavigationBarAppearance() {
-    let barStandardAppearance = UINavigationBarAppearance()
-    
-    barStandardAppearance.configureWithDefaultBackground()
-    barStandardAppearance.titleTextAttributes = [.foregroundColor: UIColor.primaryColor]
-    barStandardAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.primaryColor]
-    
     UINavigationBar.appearance().tintColor = .primaryColor
     UINavigationBar.appearance().prefersLargeTitles = true
-    UINavigationBar.appearance().standardAppearance = barStandardAppearance
-    UINavigationBar.appearance().scrollEdgeAppearance = barStandardAppearance
   }
   
   func applicationDidEnterBackground(_ application: UIApplication) {
