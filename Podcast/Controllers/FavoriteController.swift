@@ -14,6 +14,9 @@ class FavoriteController: UICollectionViewController {
   
   var allowSelectingItem: Int = 0
   
+  let podcastNameLabel = FavoritePodcastCell.podcastNameLabel()
+  let authorNameLabel = FavoritePodcastCell.authorNameLabel()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -29,7 +32,11 @@ class FavoriteController: UICollectionViewController {
   private func setupCarouselViewLayout(_ layout: CarouselViewLayout) {
     let hInset: CGFloat = collectionView.frame.width * 0.1
     let itemWidth = floor(collectionView.frame.width - 2 * hInset)
-    let itemHeight = itemWidth + 2 * 30
+    let labelPadding = 2 * UIView.defaultPadding
+    let boundingRect = CGRect(x: 0, y: 0, width: itemWidth - labelPadding, height: CGFloat(MAXFLOAT))
+    let podcastNameHeight = podcastNameLabel.textRect(forBounds: boundingRect, limitedToNumberOfLines: 1).height
+    let authorNameHeight = authorNameLabel.textRect(forBounds: boundingRect, limitedToNumberOfLines: 1).height
+    let itemHeight = ceil(itemWidth + podcastNameHeight + authorNameHeight) + 16 + 8
     
     layout.minimumLineSpacing = -itemHeight / 2
     layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
@@ -41,8 +48,6 @@ class FavoriteController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.favorite, for: indexPath)
-    
-    cell.backgroundColor = .red
     return cell
   }
 }
@@ -66,6 +71,8 @@ extension FavoriteController {
     guard let allowSelectingCell = collectionView.visibleCells.max(by: { $0.alpha < $1.alpha }),
       let allowSelectingIndexPath = collectionView.indexPath(for: allowSelectingCell) else { return }
     allowSelectingItem = allowSelectingIndexPath.item
-    print("allow selecting item: \(allowSelectingItem)")
+    collectionView.visibleCells.forEach { (cell) in
+      print("alpha: \(cell.alpha)")
+    }
   }
 }

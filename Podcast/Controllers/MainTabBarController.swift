@@ -37,10 +37,13 @@ class MainTabBarController: UITabBarController {
     let search = PodcastSearchController()
     let downloads = ViewController()
     
+    let favoriteImage = UIImage(systemName: "heart.circle.fill")!
+    let searchImage = UIImage(systemName: "magnifyingglass.circle.fill")!
+    let downloadImage = UIImage(systemName: "square.and.arrow.down.fill")!
     viewControllers = [
-      favorites.wrapInNav(tabBarTitle: "Favourites", tabBarImage: #imageLiteral(resourceName: "favorites")),
-      search.wrapInNav(tabBarTitle: "Search", tabBarImage: #imageLiteral(resourceName: "search")),
-      downloads.wrapInNav(tabBarTitle: "Downloads", tabBarImage: #imageLiteral(resourceName: "downloads"))
+      favorites.wrapInNav(tabBarTitle: "Favourites", tabBarImage: favoriteImage),
+      search.wrapInNav(tabBarTitle: "Search", tabBarImage: searchImage),
+      downloads.wrapInNav(tabBarTitle: "Downloads", tabBarImage: downloadImage)
     ]
   }
   
@@ -62,7 +65,7 @@ class MainTabBarController: UITabBarController {
     episodePlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandPlayerViewToTop)))
     episodePlayerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
     
-    episodePlayerView.willDismiss = { [unowned self] in
+    episodePlayerView.willCollapse = { [unowned self] in
       self.narrowPlayerViewAboveTabBar()
     }
     episodePlayerView.willPopulateWithEpisode = { [unowned self] (episode, episodes) in

@@ -22,7 +22,7 @@ class EpisodePlayerView: UIView {
   }()
   
   /// Delegation
-  var willDismiss: (() -> Void)?
+  var willCollapse: (() -> Void)?
   var willPopulateWithEpisode: ((Episode, [Episode]) -> Void)?
   
   /// Factor that decide whether or not perfom animation
@@ -79,8 +79,8 @@ class EpisodePlayerView: UIView {
   
   @IBOutlet weak var fullSizeViewBottomToSuperViewBottom: NSLayoutConstraint!
   
-  @IBAction func dismiss(_ sender: Any) {
-    willDismiss?()
+  @IBAction func collapse(_ sender: Any) {
+    willCollapse?()
   }
   
   @IBAction func timeChanged(_ sender: Any) {

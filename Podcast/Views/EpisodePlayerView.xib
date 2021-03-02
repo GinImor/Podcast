@@ -72,13 +72,13 @@
                     <rect key="frame" x="32" y="52" width="311" height="760"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JW-kB-XpU">
-                            <rect key="frame" x="127.66666666666666" y="0.0" width="56" height="30"/>
+                            <rect key="frame" x="124.66666666666666" y="0.0" width="62" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                            <state key="normal" title="Dismiss">
+                            <state key="normal" title="Collapse">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>
-                                <action selector="dismiss:" destination="GQq-kM-FRy" eventType="touchUpInside" id="zB2-AR-DxK"/>
+                                <action selector="collapse:" destination="GQq-kM-FRy" eventType="touchUpInside" id="Z8I-vr-Ge9"/>
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="gtY-Q3-ge8" customClass="RoundedCornerImageView" customModule="Podcast" customModuleProvider="target">
