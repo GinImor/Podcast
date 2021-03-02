@@ -53,4 +53,12 @@ extension UIView {
     superview.addSubview(self)
     centerToSuperviewSafeAreaLayoutGuide()
   }
+  
+  func pinToSuperviewHorizontalEdges(defaultSpacing: CGFloat = 0, trailingSpacing: CGFloat? = nil) {
+    guard let superview = superview else { return }
+    NSLayoutConstraint.activate([
+        leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: defaultSpacing),
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -(trailingSpacing ?? defaultSpacing))
+    ])
+  }
 }

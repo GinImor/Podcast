@@ -12,6 +12,8 @@ class FavoriteController: UICollectionViewController {
   
   var favorites: [Podcast] = []
   
+  var allowSelectingItem: Int = 0
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -21,16 +23,16 @@ class FavoriteController: UICollectionViewController {
   private func setupCollectionView() {
     collectionView.backgroundColor = .systemBackground
     collectionView.register(FavoritePodcastCell.self, forCellWithReuseIdentifier: CellID.favorite)
-    setupFlowLayout()
+    setupCarouselViewLayout(collectionViewLayout as! CarouselViewLayout)
   }
   
-  private func setupFlowLayout() {
-    let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-    let itemWidth = (collectionView.bounds.width - 3 * 16) / 2
+  private func setupCarouselViewLayout(_ layout: CarouselViewLayout) {
+    let hInset: CGFloat = collectionView.frame.width * 0.1
+    let itemWidth = floor(collectionView.frame.width - 2 * hInset)
+    let itemHeight = itemWidth + 2 * 30
     
-    flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-    flowLayout.minimumLineSpacing = 16
-    flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    layout.minimumLineSpacing = -itemHeight / 2
+    layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,3 +47,25 @@ class FavoriteController: UICollectionViewController {
   }
 }
 
+extension FavoriteController {
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if indexPath.item == allowSelectingItem {
+      print("did select item: \(indexPath.item)")
+    }
+  }
+}
+
+extension FavoriteController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    allowSelectingItem = -1
+  }
+  
+  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    guard let allowSelectingCell = collectionView.visibleCells.max(by: { $0.alpha < $1.alpha }),
+      let allowSelectingIndexPath = collectionView.indexPath(for: allowSelectingCell) else { return }
+    allowSelectingItem = allowSelectingIndexPath.item
+    print("allow selecting item: \(allowSelectingItem)")
+  }
+}

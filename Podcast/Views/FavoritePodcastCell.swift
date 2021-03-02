@@ -16,6 +16,7 @@ class FavoritePodcastCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    setupRoundedCorner()
     setupViewLayout()
   }
   
@@ -23,13 +24,27 @@ class FavoritePodcastCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  private func setupRoundedCorner() {
+    self.layer.cornerRadius = 12
+    self.layer.masksToBounds = true
+  }
+  
   private func setupViewLayout() {
-    UIStackView.verticalStack(
+    let stackView = UIStackView.verticalStack(
       arrangedSubviews: [podcastImageView, podcastNameLabel, podcastAuthorNameLabel],
       pinToSuperview: self
     )
     
-    podcastNameLabel.text = "abcde"
+    stackView.alignment = .center
+    
+    podcastImageView.heightAnchor.constraint(equalTo: podcastImageView.widthAnchor, multiplier:   1.0).isActive = true
+    podcastNameLabel.heightAnchor.constraint(equalTo: podcastAuthorNameLabel.heightAnchor, multiplier: 1.0).isActive = true
+    
+    podcastImageView.pinToSuperviewHorizontalEdges()
+    podcastNameLabel.pinToSuperviewHorizontalEdges(defaultSpacing: UIView.defaultPadding)
+    podcastAuthorNameLabel.pinToSuperviewHorizontalEdges(defaultSpacing: UIView.defaultPadding)
+    
+    podcastNameLabel.text = "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde"
     podcastAuthorNameLabel.text = "abcde"
   }
   

@@ -33,7 +33,7 @@ class MainTabBarController: UITabBarController {
   }
   
   private func setupChileVCs() {
-    let favorites = FavoriteController(collectionViewLayout: UICollectionViewFlowLayout())
+    let favorites = FavoriteController(collectionViewLayout: CarouselViewLayout())
     let search = PodcastSearchController()
     let downloads = ViewController()
     

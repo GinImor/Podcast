@@ -19,6 +19,7 @@
 		DC60BE3D25E35D5E001EF9A4 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3C25E35D5D001EF9A4 /* CellID.swift */; };
 		DC60BE3F25E363E5001EF9A4 /* FavoritePodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */; };
 		DC60BE4125E3663E001EF9A4 /* UIStackView+verticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */; };
+		DC618A9225ED38E50073DE0E /* CarouselViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC618A9125ED38E50073DE0E /* CarouselViewLayout.swift */; };
 		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
@@ -59,6 +60,7 @@
 		DC60BE3C25E35D5D001EF9A4 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
 		DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePodcastCell.swift; sourceTree = "<group>"; };
 		DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+verticalStackView.swift"; sourceTree = "<group>"; };
+		DC618A9125ED38E50073DE0E /* CarouselViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewLayout.swift; sourceTree = "<group>"; };
 		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
@@ -132,6 +134,7 @@
 		DC4E912E25D8CFF600B6EB85 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				DC618A9025ED38BF0073DE0E /* Layouts */,
 				DCDCF1C825DA8829007D7BFC /* Views */,
 				DCDCF1C525DA7AC8007D7BFC /* Utilities */,
 				DC70CE1025D922F900F2C169 /* Model */,
@@ -155,6 +158,14 @@
 				DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC618A9025ED38BF0073DE0E /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				DC618A9125ED38E50073DE0E /* CarouselViewLayout.swift */,
+			);
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 		DC70CE0E25D922BE00F2C169 /* Extensions */ = {
@@ -348,6 +359,7 @@
 				DC7B420325DD68440014684F /* CMTime+utility.swift in Sources */,
 				DC70CE1225D9230600F2C169 /* Podcast.swift in Sources */,
 				DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */,
+				DC618A9225ED38E50073DE0E /* CarouselViewLayout.swift in Sources */,
 				DCDCF1CE25DABFB6007D7BFC /* EpisodesController.swift in Sources */,
 				DC4E913425D8CFF600B6EB85 /* ViewController.swift in Sources */,
 				DCE22E6E25E69A1300A0B92C /* RoundedCornerImageView.swift in Sources */,
