@@ -10,9 +10,12 @@ import UIKit
 
 class FavoriteController: UICollectionViewController {
   
-  var favorites: [Podcast] = []
+  var favorites: [Podcast] {
+    ItunesUserDefault.shared.savedPodcasts
+  }
   
   var allowSelectingItem: Int = 0
+  var needToReload = false
   
   let podcastNameLabel = FavoritePodcastCell.podcastNameLabel()
   let authorNameLabel = FavoritePodcastCell.authorNameLabel()
@@ -22,28 +25,37 @@ class FavoriteController: UICollectionViewController {
     
     addGestursRecognizor()
     setupCollectionView()
-    fetchData()
+    setupNotification()
   }
   
-  private func fetchData() {
-    guard let podcasts = ItunesUserDefault.fetchPodcasts() else { return }
-    favorites = podcasts
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if needToReload {
+      collectionView.reloadData()
+      needToReload = false
+    }
+  }
+  
+  private func setupNotification() {
+    NotificationCenter.default.addObserver(forName: .favoritePodcastsDidChange, object: nil, queue: nil) { (_) in
+      self.needToReload = true
+    }
   }
   
   private func addGestursRecognizor() {
     let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+    longPress.delegate = self
     collectionView.addGestureRecognizer(longPress)
   }
   
   @objc private func handleLongPress(_ longPress: UILongPressGestureRecognizer) {
     switch longPress.state {
     case .ended:
-      let position = longPress.location(in: collectionView)
-      guard let indexPath = collectionView.indexPathForItem(at: position) else { return }
+      guard let indexPath = indexPathForGestureRecognizer(longPress) else { return }
       
       let actionSheet = UIAlertController(title: "Delete this podcast?", message: nil, preferredStyle: .actionSheet)
       actionSheet.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
-        self.favorites.remove(at: indexPath.item)
+        ItunesUserDefault.shared.deletePodcast(self.favoriteFor(indexPath: indexPath))
         self.collectionView.deleteItems(at: [indexPath])
         self.collectionView.collectionViewLayout.invalidateLayout()
         print("deleted index path: \(indexPath)")
@@ -75,14 +87,24 @@ class FavoriteController: UICollectionViewController {
     layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
   }
   
+  private func indexPathForGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) -> IndexPath? {
+    let location = gestureRecognizer.location(in: collectionView)
+    return collectionView.indexPathForItem(at: location)
+  }
+  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return favorites.count
+  }
+  
+  private func favoriteFor(indexPath: IndexPath) -> Podcast {
+    let lastItem = favorites.count - 1
+    return favorites[lastItem - indexPath.item]
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.favorite, for: indexPath) as! FavoritePodcastCell
     
-    cell.podcast = favorites[indexPath.item]
+    cell.podcast = favoriteFor(indexPath: indexPath)
     return cell
   }
 }
@@ -106,13 +128,13 @@ extension FavoriteController {
     guard let allowSelectingCell = collectionView.visibleCells.max(by: { $0.alpha < $1.alpha }),
       let allowSelectingIndexPath = collectionView.indexPath(for: allowSelectingCell) else { return }
     allowSelectingItem = allowSelectingIndexPath.item
-    collectionView.visibleCells.forEach { (cell) in
-      print("alpha: \(cell.alpha)")
-    }
   }
 }
 
-extension FavoriteController: UICollectionViewDelegateFlowLayout {
+extension FavoriteController: UIGestureRecognizerDelegate {
   
-  
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    let indexPath = indexPathForGestureRecognizer(gestureRecognizer)
+    return allowSelectingItem == indexPath?.item
+  }
 }

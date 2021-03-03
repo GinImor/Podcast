@@ -8,20 +8,44 @@
 
 import Foundation
 
-enum ItunesUserDefault {
+struct ItunesUserDefault {
   
-  static func savePodcast(_ podcast: Podcast) {
-    guard var podcasts = fetchPodcasts() else { return }
-    podcasts.append(podcast)
+  static var shared = ItunesUserDefault()
+  
+  private(set) var savedPodcasts: [Podcast]! {
+    didSet { savePodcasts() }
+  }
+  
+  init() {
+    self.savedPodcasts = fetchPodcasts()
+  }
+  
+  func contains(podcast: Podcast) -> Bool {
+    return savedPodcasts.contains {
+      $0.trackName == podcast.trackName && $0.artistName == podcast.artistName
+    }
+  }
+  
+  mutating func savePodcast(_ podcast: Podcast) {
+    guard savedPodcasts != nil else { return }
+    savedPodcasts.append(podcast)
+  }
+  
+  mutating func deletePodcast(_ podcast: Podcast) {
+    guard savedPodcasts != nil else { return }
+    savedPodcasts.removeAll { $0.trackName == podcast.trackName && $0.artistName == podcast.artistName }
+  }
+  
+  func savePodcasts() {
     do {
-      let data = try NSKeyedArchiver.archivedData(withRootObject: podcasts, requiringSecureCoding: false)
+      let data = try NSKeyedArchiver.archivedData(withRootObject: savedPodcasts!, requiringSecureCoding: false)
       UserDefaults.standard.set(data, forKey: UserDefaultsKey.podcasts)
     } catch {
       print("encode error: \(error)")
     }
   }
   
-  static func fetchPodcasts() -> [Podcast]? {
+  func fetchPodcasts() -> [Podcast]? {
     guard let data = UserDefaults.standard.object(forKey: UserDefaultsKey.podcasts) as? Data else { return [] }
     do {
       let podcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Podcast]

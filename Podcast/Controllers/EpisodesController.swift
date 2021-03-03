@@ -9,11 +9,27 @@
 import UIKit
 import FeedKit
 
+extension Notification.Name {
+  static let favoritePodcastsDidChange = Notification.Name("favoritePodcastsDidChange")
+}
+
 class EpisodesController: UITableViewController {
   
   var episodes: [Episode] = []
   
   var podcast: Podcast!
+  var isPodcastInitiallyFavorite = false
+  var isPodcastFavorite = false {
+    didSet {
+      if isPodcastFavorite {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain,
+        target: self, action: #selector(favorite))
+      } else {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain,
+        target: self, action: #selector(favorite))
+      }
+    }
+  }
   
   var finishedLoading = false
   var activityIndicator: UIActivityIndicatorView!
@@ -23,7 +39,6 @@ class EpisodesController: UITableViewController {
     
     setupActivityIndicator()
     setupBarAppearance()
-    setupNavigationBarItems()
     setupTableView()
     loadEpisodes()
   }
@@ -31,28 +46,36 @@ class EpisodesController: UITableViewController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidAppear(animated)
     activityIndicator.stopAnimating()
+    
+    if isPodcastInitiallyFavorite != isPodcastFavorite {
+      if isPodcastFavorite {
+        ItunesUserDefault.shared.savePodcast(podcast)
+      } else {
+        ItunesUserDefault.shared.deletePodcast(podcast)
+      }
+      isPodcastInitiallyFavorite.toggle()
+      NotificationCenter.default.post(name: .favoritePodcastsDidChange, object: nil)
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if !finishedLoading { activityIndicator.startAnimating() }
+    setupNavigationBarItems()
   }
   
   private func setupNavigationBarItems() {
-    let fetchButton = UIBarButtonItem(title: "Fetch", style: .plain, target: self, action: #selector(fetch))
-    let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favorite))
-    navigationItem.rightBarButtonItems = [favoriteButton, fetchButton]
-  }
-  
-  @objc func fetch() {
-    let podcasts = ItunesUserDefault.fetchPodcasts()
-    podcasts?.forEach({ (pod) in
-      print("name: \(pod.trackName ?? "")")
-    })
+    if ItunesUserDefault.shared.contains(podcast: podcast) {
+      isPodcastInitiallyFavorite = true
+      isPodcastFavorite = true
+    } else {
+      isPodcastInitiallyFavorite = false
+      isPodcastFavorite = false
+    }
   }
   
   @objc func favorite() {
-    ItunesUserDefault.savePodcast(podcast!)
+    isPodcastFavorite.toggle()
   }
   
   private func loadEpisodes() {
