@@ -80,8 +80,6 @@ class CarouselViewLayout: UICollectionViewFlowLayout {
     layoutAttributes.alpha = alpha
     layoutAttributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
     layoutAttributes.zIndex = Int(ratio * 10)
-    
-    print("indexPath: \(layoutAttributes.indexPath), alpha: \(layoutAttributes.alpha), zIndex: \(layoutAttributes.zIndex)")
   }
   
   override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {

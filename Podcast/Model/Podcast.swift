@@ -13,18 +13,20 @@ class Podcast: NSObject, NSCoding, Decodable {
   static var trackNameKey: String { "trackName" }
   static var artistNameKey: String { "artistName" }
   static var artworkUrlKey: String { "artworkUrl" }
+  static var feedUrlKey: String { "feedUrl" }
   
   func encode(with coder: NSCoder) {
     coder.encode(trackName, forKey: Podcast.trackNameKey)
     coder.encode(artistName, forKey: Podcast.artistNameKey)
     coder.encode(artworkUrl, forKey: Podcast.artworkUrlKey)
+    coder.encode(feedUrl, forKey: Podcast.feedUrlKey)
   }
   
   required init?(coder: NSCoder) {
     self.trackName = coder.decodeObject(forKey: Podcast.trackNameKey) as? String
     self.artistName = coder.decodeObject(forKey: Podcast.artistNameKey) as? String
     self.artworkUrl = coder.decodeObject(forKey: Podcast.artworkUrlKey) as? String
-    self.feedUrl = nil
+    self.feedUrl = coder.decodeObject(forKey: Podcast.feedUrlKey) as? String
     self.trackCount = nil
   }
   

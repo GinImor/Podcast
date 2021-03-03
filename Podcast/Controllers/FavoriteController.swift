@@ -113,7 +113,9 @@ extension FavoriteController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.item == allowSelectingItem {
-      print("did select item: \(indexPath.item)")
+      let episodesController = EpisodesController()
+      episodesController.podcast = favoriteFor(indexPath: indexPath)
+      navigationController?.pushViewController(episodesController, animated: true)
     }
   }
 }
