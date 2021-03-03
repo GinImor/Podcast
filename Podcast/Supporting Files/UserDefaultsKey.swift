@@ -9,6 +9,6 @@
 import Foundation
 
 enum UserDefaultsKey {
-  
   static let podcasts = "PodcastsKey"
+  static let episodes = "EpisodesKey"
 }

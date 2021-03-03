@@ -11,6 +11,7 @@ import FeedKit
 
 extension Notification.Name {
   static let favoritePodcastsDidChange = Notification.Name("favoritePodcastsDidChange")
+  static let downloadEpisodesDidChange = Notification.Name("downloadEpisodesDidChange")
 }
 
 class EpisodesController: UITableViewController {
@@ -129,4 +130,26 @@ class EpisodesController: UITableViewController {
     
     episodePlayerView.willPopulateWithEpisode?(episode, episodes)
   }
+  
+  override func tableView(
+    _ tableView: UITableView,
+    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+  ) -> UISwipeActionsConfiguration? {
+    
+    var actions = [UIContextualAction]()
+    
+    let downloadAction = UIContextualAction(style: .normal, title: "Download") {
+      [unowned self] (_, _, completion) in
+      
+      if ItunesUserDefault.shared.saveEpisode(self.episodes[indexPath.row]) == true {
+        NotificationCenter.default.post(name: .downloadEpisodesDidChange, object: nil)
+      }
+      completion(true)
+    }
+    downloadAction.backgroundColor = .primaryColor
+    actions.append(downloadAction)
+    
+    return UISwipeActionsConfiguration(actions: actions)
+  }
+  
 }

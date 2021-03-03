@@ -33,9 +33,9 @@ class MainTabBarController: UITabBarController {
   }
   
   private func setupChileVCs() {
-    let favorites = FavoriteController(collectionViewLayout: CarouselViewLayout())
+    let favorites = FavoritesController(collectionViewLayout: CarouselViewLayout())
     let search = PodcastSearchController()
-    let downloads = ViewController()
+    let downloads = DownloadsController()
     
     let favoriteImage = UIImage(systemName: "heart.circle.fill")!
     let searchImage = UIImage(systemName: "magnifyingglass.circle.fill")!

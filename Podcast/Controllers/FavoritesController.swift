@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteController: UICollectionViewController {
+class FavoritesController: UICollectionViewController {
   
   var favorites: [Podcast] {
     ItunesUserDefault.shared.savedPodcasts
@@ -109,7 +109,7 @@ class FavoriteController: UICollectionViewController {
   }
 }
 
-extension FavoriteController {
+extension FavoritesController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.item == allowSelectingItem {
@@ -120,7 +120,7 @@ extension FavoriteController {
   }
 }
 
-extension FavoriteController {
+extension FavoritesController {
   
   override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     allowSelectingItem = -1
@@ -133,7 +133,7 @@ extension FavoriteController {
   }
 }
 
-extension FavoriteController: UIGestureRecognizerDelegate {
+extension FavoritesController: UIGestureRecognizerDelegate {
   
   func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
     let indexPath = indexPathForGestureRecognizer(gestureRecognizer)
