@@ -27,9 +27,24 @@ class FavoritePodcastCell: UICollectionViewCell {
     return label
   }
   
-  let podcastImageView = UIImageView(image: #imageLiteral(resourceName: "appicon"))
+  static func podcastImageView() -> UIImageView {
+    let imageView = UIImageView()
+    imageView.backgroundColor = .systemGray3
+    return imageView
+  }
+  
+  var podcast: Podcast! {
+    didSet {
+      podcastNameLabel.text = podcast.trackName
+      podcastAuthorNameLabel.text = podcast.artistName
+      guard let artworkUrlString = podcast.artworkUrl, let artworkUrl = URL(string: artworkUrlString)
+      else { return }
+      podcastImageView.sd_setImage(with: artworkUrl)
+    }
+  }
   let podcastNameLabel = FavoritePodcastCell.podcastNameLabel()
   let podcastAuthorNameLabel = FavoritePodcastCell.authorNameLabel()
+  let podcastImageView = FavoritePodcastCell.podcastImageView()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -71,4 +86,10 @@ class FavoritePodcastCell: UICollectionViewCell {
     podcastAuthorNameLabel.text = "abcgdef"
   }
   
+  override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    let attributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+    layer.zPosition = CGFloat(layoutAttributes.zIndex)
+    attributes.zIndex = 0
+    return attributes
+  }
 }

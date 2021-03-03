@@ -79,7 +79,9 @@ class CarouselViewLayout: UICollectionViewFlowLayout {
     
     layoutAttributes.alpha = alpha
     layoutAttributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
-    layoutAttributes.zIndex = Int(alpha * 10)
+    layoutAttributes.zIndex = Int(ratio * 10)
+    
+    print("indexPath: \(layoutAttributes.indexPath), alpha: \(layoutAttributes.alpha), zIndex: \(layoutAttributes.zIndex)")
   }
   
   override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
@@ -88,9 +90,10 @@ class CarouselViewLayout: UICollectionViewFlowLayout {
       else { return proposedContentOffset }
 
     let proposedContentOffsetOriginY = proposedContentOffset.y + collectionView.bounds.height/2
-    let centeringAttributes = layoutAttributesArray.min {
+    
+    guard let centeringAttributes = layoutAttributesArray.min(by: {
       return abs($0.center.y - proposedContentOffsetOriginY) < abs($1.center.y - proposedContentOffsetOriginY)
-    }!
+    }) else { return proposedContentOffset }
 
     let targetContentOffsetY = centeringAttributes.center.y - collectionView.bounds.height/2
     let targetContentOffset = CGPoint(x: proposedContentOffset.x, y: targetContentOffsetY)
@@ -98,5 +101,8 @@ class CarouselViewLayout: UICollectionViewFlowLayout {
     return targetContentOffset
   }
   
+  override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+    return targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: .zero)
+  }
 }
 

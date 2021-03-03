@@ -13,7 +13,7 @@ class EpisodesController: UITableViewController {
   
   var episodes: [Episode] = []
   
-  var podcast: Podcast?
+  var podcast: Podcast!
   
   var finishedLoading = false
   var activityIndicator: UIActivityIndicatorView!
@@ -23,6 +23,7 @@ class EpisodesController: UITableViewController {
     
     setupActivityIndicator()
     setupBarAppearance()
+    setupNavigationBarItems()
     setupTableView()
     loadEpisodes()
   }
@@ -35,6 +36,23 @@ class EpisodesController: UITableViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if !finishedLoading { activityIndicator.startAnimating() }
+  }
+  
+  private func setupNavigationBarItems() {
+    let fetchButton = UIBarButtonItem(title: "Fetch", style: .plain, target: self, action: #selector(fetch))
+    let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favorite))
+    navigationItem.rightBarButtonItems = [favoriteButton, fetchButton]
+  }
+  
+  @objc func fetch() {
+    let podcasts = ItunesUserDefault.fetchPodcasts()
+    podcasts?.forEach({ (pod) in
+      print("name: \(pod.trackName ?? "")")
+    })
+  }
+  
+  @objc func favorite() {
+    ItunesUserDefault.savePodcast(podcast!)
   }
   
   private func loadEpisodes() {

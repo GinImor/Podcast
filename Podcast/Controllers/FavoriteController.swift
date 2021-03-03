@@ -20,7 +20,40 @@ class FavoriteController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    addGestursRecognizor()
     setupCollectionView()
+    fetchData()
+  }
+  
+  private func fetchData() {
+    guard let podcasts = ItunesUserDefault.fetchPodcasts() else { return }
+    favorites = podcasts
+  }
+  
+  private func addGestursRecognizor() {
+    let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+    collectionView.addGestureRecognizer(longPress)
+  }
+  
+  @objc private func handleLongPress(_ longPress: UILongPressGestureRecognizer) {
+    switch longPress.state {
+    case .ended:
+      let position = longPress.location(in: collectionView)
+      guard let indexPath = collectionView.indexPathForItem(at: position) else { return }
+      
+      let actionSheet = UIAlertController(title: "Delete this podcast?", message: nil, preferredStyle: .actionSheet)
+      actionSheet.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
+        self.favorites.remove(at: indexPath.item)
+        self.collectionView.deleteItems(at: [indexPath])
+        self.collectionView.collectionViewLayout.invalidateLayout()
+        print("deleted index path: \(indexPath)")
+        
+      }))
+      actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+      
+      present(actionSheet, animated: true)
+    default: ()
+    }
   }
   
   private func setupCollectionView() {
@@ -43,11 +76,13 @@ class FavoriteController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5 // favorites.count
+    return favorites.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.favorite, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.favorite, for: indexPath) as! FavoritePodcastCell
+    
+    cell.podcast = favorites[indexPath.item]
     return cell
   }
 }
@@ -75,4 +110,9 @@ extension FavoriteController {
       print("alpha: \(cell.alpha)")
     }
   }
+}
+
+extension FavoriteController: UICollectionViewDelegateFlowLayout {
+  
+  
 }
