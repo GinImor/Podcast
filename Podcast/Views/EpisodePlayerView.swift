@@ -10,6 +10,10 @@ import UIKit
 import AVKit
 import MediaPlayer
 
+extension Notification.Name {
+  static let didSelectEpisode = Notification.Name(rawValue: "didSelectEpisode")
+}
+
 class EpisodePlayerView: UIView {
   
   static var shared: EpisodePlayerView = {
@@ -155,10 +159,25 @@ class EpisodePlayerView: UIView {
   
   private func setupNotifications() {
     let nc = NotificationCenter.default
+    
     nc.addObserver(self,
                    selector: #selector(handleInterruption),
                    name: AVAudioSession.interruptionNotification,
                    object: nil)
+    
+    nc.addObserver(forName: .didSelectEpisode, object: nil, queue: nil) { (notification) in
+      guard let userInfo = notification.userInfo,
+        let episode = userInfo["episode"] as? Episode,
+        let episodes = userInfo["episodes"] as? [Episode] else { return }
+      self.willPopulateWithEpisode?(episode, episodes)
+    }
+    
+    nc.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (_) in
+      self.didEnterBackground = true
+    }
+    nc.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { (_) in
+      self.didEnterBackground = false
+    }
   }
 
   @objc func handleInterruption(notification: Notification) {
@@ -286,7 +305,7 @@ class EpisodePlayerView: UIView {
   
   /// initial play
   private func playEpisode(_ episode: Episode) {
-    guard let audioUrl = URL(string: episode.audioUrl) else { return }
+    guard let audioUrl = URL(string: episode.streamUrl) else { return }
     
     let playerItem = AVPlayerItem(url: audioUrl)
     episodePlayer.replaceCurrentItem(with: playerItem)

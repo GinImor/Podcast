@@ -56,4 +56,17 @@ class ItunesService {
     }
   }
   
+  func downloadEpisode(_ episode: Episode) {
+    let destination = Alamofire.DownloadRequest.suggestedDownloadDestination()
+    
+    AF.download(episode.streamUrl, to: destination).downloadProgress(closure: { progress in
+      print("progress: \(progress.fractionCompleted)")
+    }).response { (downloadResponse) in
+      guard let fileUrl = downloadResponse.fileURL?.absoluteString else { return }
+      var newEpisode = episode
+      newEpisode.fileUrl = fileUrl
+      ItunesUserDefault.shared.updateEpisode(episode, with: newEpisode)
+    }
+  }
+  
 }

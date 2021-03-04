@@ -77,6 +77,11 @@ struct ItunesUserDefault {
     savedEpisodes.removeAll { $0.title == episode.title && $0.author == episode.author }
   }
   
+  mutating func updateEpisode(_ oldEpisode: Episode, with newEpisode: Episode) {
+    guard savedEpisodes != nil, let index = savedEpisodes.firstIndex(of: oldEpisode) else { return }
+    savedEpisodes[index] = newEpisode
+  }
+  
   func saveEpisodes() {
     do {
       let data = try JSONEncoder().encode(savedEpisodes)

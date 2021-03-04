@@ -15,7 +15,8 @@ struct Episode: Equatable, Codable {
   let description: String?
   let author: String?
   let imageUrl: String
-  let audioUrl: String
+  let streamUrl: String
+  var fileUrl: String?
   
   init(rssFeedItem: RSSFeedItem, altImageUrl: String) {
     title = rssFeedItem.title
@@ -23,6 +24,6 @@ struct Episode: Equatable, Codable {
     description = rssFeedItem.description
     author = rssFeedItem.iTunes?.iTunesAuthor
     imageUrl = rssFeedItem.iTunes?.iTunesImage?.attributes?.href ?? altImageUrl
-    audioUrl = rssFeedItem.enclosure?.attributes?.url ?? ""
+    streamUrl = rssFeedItem.enclosure?.attributes?.url ?? ""
   }
 }

@@ -62,6 +62,10 @@ class EpisodesController: UITableViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if !finishedLoading { activityIndicator.startAnimating() }
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     setupNavigationBarItems()
   }
   
@@ -125,10 +129,9 @@ class EpisodesController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let episodePlayerView = EpisodePlayerView.shared
     let episode = episodes[indexPath.row]
-    
-    episodePlayerView.willPopulateWithEpisode?(episode, episodes)
+    let userInfo: [String : Any] = ["episode": episode, "episodes": episodes]
+    NotificationCenter.default.post(name: .didSelectEpisode, object: nil, userInfo: userInfo)
   }
   
   override func tableView(
@@ -141,8 +144,18 @@ class EpisodesController: UITableViewController {
     let downloadAction = UIContextualAction(style: .normal, title: "Download") {
       [unowned self] (_, _, completion) in
       
-      if ItunesUserDefault.shared.saveEpisode(self.episodes[indexPath.row]) == true {
+      let download = self.episodes[indexPath.row]
+      if ItunesUserDefault.shared.saveEpisode(download) == true {
         NotificationCenter.default.post(name: .downloadEpisodesDidChange, object: nil)
+        
+//        ItunesService.shared.downloadEpisode(self.episodes[indexPath.row])
+        
+        // simulate download
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
+          var newEpisode = download
+          newEpisode.fileUrl = "TestURL"
+          ItunesUserDefault.shared.updateEpisode(download, with: newEpisode)
+        }
       }
       completion(true)
     }

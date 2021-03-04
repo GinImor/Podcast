@@ -69,4 +69,10 @@ class DownloadsController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let episode = downloadFor(indexPath: indexPath)
+    let userInfo: [String: Any] =
+      ["episode": episode, "episodes": [Episode](downloads.reversed())]
+    NotificationCenter.default.post(name: .didSelectEpisode, object: nil, userInfo: userInfo)
+  }
 }
