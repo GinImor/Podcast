@@ -60,7 +60,7 @@ class ItunesService {
     let destination = Alamofire.DownloadRequest.suggestedDownloadDestination()
     
     AF.download(episode.streamUrl, to: destination).downloadProgress(closure: { progress in
-      print("progress: \(progress.fractionCompleted)")
+      ItunesNotificationCenter.default.postForDidUpdateProgress(progress, for: episode)
     }).response { (downloadResponse) in
       guard let fileName = downloadResponse.fileURL?.lastPathComponent else { return }
       var newEpisode = episode

@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BcL-8W-noe">
-                        <rect key="frame" x="8" y="8" width="306" height="191"/>
+                        <rect key="frame" x="8" y="8" width="306" height="183"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon" translatesAutoresizingMaskIntoConstraints="NO" id="g6q-S4-xMX" customClass="RoundedCornerImageView" customModule="Podcast" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -52,18 +52,25 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-u1-xnX">
+                        <rect key="frame" x="8" y="197" width="306" height="2"/>
+                    </progressView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BcL-8W-noe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="96i-m0-cQH"/>
                     <constraint firstAttribute="trailing" secondItem="BcL-8W-noe" secondAttribute="trailing" constant="8" id="A4g-Uq-Rgp"/>
+                    <constraint firstAttribute="trailing" secondItem="jbV-u1-xnX" secondAttribute="trailing" constant="8" id="RhB-Ff-3aL"/>
+                    <constraint firstItem="jbV-u1-xnX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="YuX-yw-w9B"/>
                     <constraint firstItem="BcL-8W-noe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="gSZ-gF-4kQ"/>
-                    <constraint firstAttribute="bottom" secondItem="BcL-8W-noe" secondAttribute="bottom" constant="8" id="xY0-TA-KNI"/>
+                    <constraint firstAttribute="bottom" secondItem="jbV-u1-xnX" secondAttribute="bottom" constant="8" id="tOg-gW-ah9"/>
+                    <constraint firstItem="jbV-u1-xnX" firstAttribute="bottom" secondItem="BcL-8W-noe" secondAttribute="bottom" constant="8" id="xY0-TA-KNI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="Tbd-cs-Bmu" id="A85-K3-s4X"/>
                 <outlet property="episodeImageView" destination="g6q-S4-xMX" id="1GJ-3a-IiC"/>
+                <outlet property="progressView" destination="jbV-u1-xnX" id="10j-HY-rN0"/>
                 <outlet property="pubDateLabel" destination="P2k-wO-hDJ" id="7y2-k2-hwH"/>
                 <outlet property="titleLabel" destination="0qK-ZC-2c6" id="5pe-8P-vmu"/>
             </connections>

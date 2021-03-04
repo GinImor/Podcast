@@ -137,24 +137,13 @@ class EpisodesController: UITableViewController {
     _ tableView: UITableView,
     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
   ) -> UISwipeActionsConfiguration? {
-    
     var actions = [UIContextualAction]()
-    
     let downloadAction = UIContextualAction(style: .normal, title: "Download") {
       [unowned self] (_, _, completion) in
-      
       let download = self.episodes[indexPath.row]
       if ItunesUserDefault.shared.saveEpisode(download) == true {
         NotificationCenter.default.post(name: .downloadEpisodesDidChange, object: nil)
-        
-//        ItunesService.shared.downloadEpisode(self.episodes[indexPath.row])
-        
-        // simulate download
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
-          var newEpisode = download
-          newEpisode.fileName = "TestURL"
-          ItunesUserDefault.shared.updateEpisode(download, with: newEpisode)
-        }
+        ItunesService.shared.downloadEpisode(self.episodes[indexPath.row])
       }
       completion(true)
     }

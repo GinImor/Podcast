@@ -35,6 +35,21 @@ class DownloadsController: UITableViewController {
     NotificationCenter.default.addObserver(forName: .downloadEpisodesDidChange, object: nil, queue: nil) { (_) in
       self.needToReload = true
     }
+    ItunesNotificationCenter.default.observeForDidUpdateProgress { (progress, episode) in
+      guard let index = self.downloads.firstIndex(of: episode) else { return }
+      
+      let indexPath = IndexPath(row: self.rowFor(indexPathRow: index), section: 0)
+      guard let cell = self.tableView.cellForRow(at: indexPath) as? EpisodeCell else { return }
+      
+      cell.progressView.progress = Float(progress.fractionCompleted)
+      
+      if cell.progressView.isHidden {
+        cell.progressView.isHidden = false
+      }
+      if progress.fractionCompleted == 1.0 {
+        cell.progressView.isHidden = true
+      }
+    }
   }
   
   private func setupTableView() {
@@ -47,8 +62,12 @@ class DownloadsController: UITableViewController {
   }
   
   private func downloadFor(indexPath: IndexPath) -> Episode {
+    return downloads[rowFor(indexPathRow: indexPath.row)]
+  }
+  
+  private func rowFor(indexPathRow: Int) -> Int {
     let lastRow = downloads.count - 1
-    return downloads[lastRow - indexPath.row]
+    return lastRow - indexPathRow
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

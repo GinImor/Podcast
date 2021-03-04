@@ -16,6 +16,11 @@ class EpisodeCell: UITableViewCell {
   }
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var progressView: UIProgressView! {
+    didSet {
+      progressView.progressTintColor = .primaryColor
+    }
+  }
   
   var episode: Episode! {
     didSet {
