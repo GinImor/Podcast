@@ -13,21 +13,30 @@ class PodcastSearchController: UITableViewController {
   
   var podcasts: [Podcast] = []
   
+  var startFetchingPodcasts = false
+  
+  let searchingIndicator = UIActivityIndicatorView()
+  let searchingLabel: UILabel = {
+    let label = UILabel()
+    label.text = "Searching for Podcasts"
+    label.textColor = .primaryColor
+    return label
+  }()
+  
+  lazy var footerView: UIView = {
+    let uiView = UIView()
+    let stackView = UIStackView(arrangedSubviews: [searchingLabel, searchingIndicator])
+    stackView.spacing = UIView.defaultPadding
+    stackView.centerToSuperviewSafeAreaLayoutGuide(superview: uiView)
+    return uiView
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupSearchbar()
     setupTableView()
   }
-  
-  // MARK: - For Testing
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    navigationItem.searchController?.searchBar.text = "Swift"
-    searchBarTextDidEndEditing(navigationItem.searchController!.searchBar)
-  }
-  
   
   private func setupSearchbar() {
     let searchController = UISearchController(searchResultsController: nil)
@@ -69,11 +78,16 @@ class PodcastSearchController: UITableViewController {
 }
 
 extension PodcastSearchController: UISearchBarDelegate {
-  
-  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard searchBar.text != nil && searchBar.text != "" else { return }
+    podcasts = []
+    tableView.reloadData()
+    startFetchingPodcasts = true
     ItunesService.shared.fetchPodcasts(searchText: searchBar.text ?? "") { podcasts in
       self.podcasts = podcasts
       self.tableView.reloadData()
+      self.startFetchingPodcasts = false
     }
   }
 }
@@ -85,17 +99,31 @@ extension PodcastSearchController {
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let label = UILabel()
-    
+
     label.text = "No results. Please enter a search query"
     label.textAlignment = .center
     label.textColor = .primaryColor
     label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    
+
     return label
   }
-  
+
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return podcasts.count == 0 ? 250 : 0
+    return podcasts.count == 0 && !startFetchingPodcasts ? 250 : 0
+  }
+  
+  override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    return footerView
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    if startFetchingPodcasts {
+      searchingIndicator.startAnimating()
+      return 250
+    } else {
+      searchingIndicator.stopAnimating()
+      return 0
+    }
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
