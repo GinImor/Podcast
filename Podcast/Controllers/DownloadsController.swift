@@ -71,8 +71,18 @@ class DownloadsController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let episode = downloadFor(indexPath: indexPath)
-    let userInfo: [String: Any] =
-      ["episode": episode, "episodes": [Episode](downloads.reversed())]
-    NotificationCenter.default.post(name: .didSelectEpisode, object: nil, userInfo: userInfo)
+    let episodes = [Episode](downloads.reversed())
+    
+    if episode.fileName != nil {
+      ItunesNotificationCenter.default.postForDidSelectEpisode(episode, episodes: episodes)
+    } else {
+      let alert = UIAlertController(title: "Download Not Complete!", message: "Do you want to use your network to play the episode?", preferredStyle: .actionSheet)
+      
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+        ItunesNotificationCenter.default.postForDidSelectEpisode(episode, episodes: episodes)
+      }))
+      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+      present(alert, animated: true)
+    }
   }
 }

@@ -62,9 +62,9 @@ class ItunesService {
     AF.download(episode.streamUrl, to: destination).downloadProgress(closure: { progress in
       print("progress: \(progress.fractionCompleted)")
     }).response { (downloadResponse) in
-      guard let fileUrl = downloadResponse.fileURL?.absoluteString else { return }
+      guard let fileName = downloadResponse.fileURL?.lastPathComponent else { return }
       var newEpisode = episode
-      newEpisode.fileUrl = fileUrl
+      newEpisode.fileName = fileName
       ItunesUserDefault.shared.updateEpisode(episode, with: newEpisode)
     }
   }

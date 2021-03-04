@@ -159,17 +159,15 @@ class EpisodePlayerView: UIView {
   
   private func setupNotifications() {
     let nc = NotificationCenter.default
+    let inc = ItunesNotificationCenter.default
     
     nc.addObserver(self,
                    selector: #selector(handleInterruption),
                    name: AVAudioSession.interruptionNotification,
                    object: nil)
-    
-    nc.addObserver(forName: .didSelectEpisode, object: nil, queue: nil) { (notification) in
-      guard let userInfo = notification.userInfo,
-        let episode = userInfo["episode"] as? Episode,
-        let episodes = userInfo["episodes"] as? [Episode] else { return }
-      self.willPopulateWithEpisode?(episode, episodes)
+
+    inc.observeForDidSelectEpisode { [weak self] in
+      self?.willPopulateWithEpisode?($0, $1)
     }
     
     nc.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (_) in
@@ -305,9 +303,18 @@ class EpisodePlayerView: UIView {
   
   /// initial play
   private func playEpisode(_ episode: Episode) {
-    guard let audioUrl = URL(string: episode.streamUrl) else { return }
+    let playUrl: URL
+    if let fileName = episode.fileName,
+      let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    {
+      playUrl = documentURL.appendingPathComponent(fileName)
+      print("playing offline, playURL: \(playUrl)")
+    } else {
+      playUrl = URL(string: episode.streamUrl) ?? URL(string: "")!
+      print("playing online, playURL: \(playUrl)")
+    }
     
-    let playerItem = AVPlayerItem(url: audioUrl)
+    let playerItem = AVPlayerItem(url: playUrl)
     episodePlayer.replaceCurrentItem(with: playerItem)
     episodePlayer.automaticallyWaitsToMinimizeStalling = true
     episodePlayer.play()

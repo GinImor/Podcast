@@ -22,6 +22,7 @@
 		DC60BE3F25E363E5001EF9A4 /* FavoritePodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */; };
 		DC60BE4125E3663E001EF9A4 /* UIStackView+verticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */; };
 		DC618A9225ED38E50073DE0E /* CarouselViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC618A9125ED38E50073DE0E /* CarouselViewLayout.swift */; };
+		DC6A8E9325F0C71700394FE6 /* ItunesNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A8E9225F0C71700394FE6 /* ItunesNotificationCenter.swift */; };
 		DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0825D9084400F2C169 /* MainTabBarController.swift */; };
 		DC70CE0B25D90A3D00F2C169 /* UIViewController+navInTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */; };
 		DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */; };
@@ -66,6 +67,7 @@
 		DC60BE3E25E363E5001EF9A4 /* FavoritePodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePodcastCell.swift; sourceTree = "<group>"; };
 		DC60BE4025E3663E001EF9A4 /* UIStackView+verticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+verticalStackView.swift"; sourceTree = "<group>"; };
 		DC618A9125ED38E50073DE0E /* CarouselViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewLayout.swift; sourceTree = "<group>"; };
+		DC6A8E9225F0C71700394FE6 /* ItunesNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesNotificationCenter.swift; sourceTree = "<group>"; };
 		DC70CE0825D9084400F2C169 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DC70CE0A25D90A3D00F2C169 /* UIViewController+navInTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+navInTabBar.swift"; sourceTree = "<group>"; };
 		DC70CE0C25D9219E00F2C169 /* PodcastSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PodcastSearchController.swift; path = Podcast/Controllers/PodcastSearchController.swift; sourceTree = SOURCE_ROOT; };
@@ -218,6 +220,7 @@
 			children = (
 				DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */,
 				DC32F38D25EF266C007621D4 /* ItunesUserDefault.swift */,
+				DC6A8E9225F0C71700394FE6 /* ItunesNotificationCenter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				DC70CE0925D9084400F2C169 /* MainTabBarController.swift in Sources */,
 				DC60BE3F25E363E5001EF9A4 /* FavoritePodcastCell.swift in Sources */,
 				DC4E913225D8CFF600B6EB85 /* SceneDelegate.swift in Sources */,
+				DC6A8E9325F0C71700394FE6 /* ItunesNotificationCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -130,8 +130,7 @@ class EpisodesController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let episode = episodes[indexPath.row]
-    let userInfo: [String : Any] = ["episode": episode, "episodes": episodes]
-    NotificationCenter.default.post(name: .didSelectEpisode, object: nil, userInfo: userInfo)
+    ItunesNotificationCenter.default.postForDidSelectEpisode(episode, episodes: episodes)
   }
   
   override func tableView(
@@ -153,7 +152,7 @@ class EpisodesController: UITableViewController {
         // simulate download
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
           var newEpisode = download
-          newEpisode.fileUrl = "TestURL"
+          newEpisode.fileName = "TestURL"
           ItunesUserDefault.shared.updateEpisode(download, with: newEpisode)
         }
       }
