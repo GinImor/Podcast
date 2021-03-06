@@ -23,9 +23,9 @@ class FavoritesController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupNotification()
     addGestursRecognizor()
     setupCollectionView()
-    setupNotification()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -109,6 +109,7 @@ class FavoritesController: UICollectionViewController {
   }
 }
 
+
 extension FavoritesController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -119,6 +120,7 @@ extension FavoritesController {
     }
   }
 }
+
 
 extension FavoritesController {
   
@@ -132,6 +134,7 @@ extension FavoritesController {
     allowSelectingItem = allowSelectingIndexPath.item
   }
 }
+
 
 extension FavoritesController: UIGestureRecognizerDelegate {
   

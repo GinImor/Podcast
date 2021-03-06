@@ -62,20 +62,8 @@ class PodcastSearchController: UITableViewController {
     tableView.register(podcastCellNib, forCellReuseIdentifier: CellID.podcast)
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return podcasts.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.podcast, for: indexPath) as! PodcastCell
-    let podcast = podcasts[indexPath.row]
-    
-    cell.podcast = podcast
-    
-    return cell
-  }
-  
 }
+
 
 extension PodcastSearchController: UISearchBarDelegate {
 
@@ -93,7 +81,22 @@ extension PodcastSearchController: UISearchBarDelegate {
 }
 
 
-// MARK: - Table View Delegate
+extension PodcastSearchController {
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return podcasts.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.podcast, for: indexPath) as! PodcastCell
+    let podcast = podcasts[indexPath.row]
+    
+    cell.podcast = podcast
+    
+    return cell
+  }
+}
+
 
 extension PodcastSearchController {
   

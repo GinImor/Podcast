@@ -9,11 +9,6 @@
 import UIKit
 import FeedKit
 
-extension Notification.Name {
-  static let favoritePodcastsDidChange = Notification.Name("favoritePodcastsDidChange")
-  static let downloadEpisodesDidChange = Notification.Name("downloadEpisodesDidChange")
-}
-
 class EpisodesController: UITableViewController {
   
   var episodes: [Episode] = []
@@ -114,19 +109,28 @@ class EpisodesController: UITableViewController {
     let cellNib = UINib(nibName: CellID.episode, bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: CellID.episode)
   }
+ 
+}
+
+
+extension EpisodesController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return episodes.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellID.episode, for: indexPath) as! EpisodeCell
-    let episode = episodes[indexPath.row]
-    
-    cell.episode = episode
-    
-    return cell
-  }
+     return episodes.count
+   }
+   
+   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: CellID.episode, for: indexPath) as! EpisodeCell
+     let episode = episodes[indexPath.row]
+     
+     cell.episode = episode
+     
+     return cell
+   }
+}
+
+
+extension EpisodesController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let episode = episodes[indexPath.row]
@@ -152,5 +156,4 @@ class EpisodesController: UITableViewController {
     
     return UISwipeActionsConfiguration(actions: actions)
   }
-  
 }

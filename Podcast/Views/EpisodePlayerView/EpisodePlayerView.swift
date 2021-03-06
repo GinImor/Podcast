@@ -10,15 +10,11 @@ import UIKit
 import AVKit
 import MediaPlayer
 
-extension Notification.Name {
-  static let didSelectEpisode = Notification.Name(rawValue: "didSelectEpisode")
-}
-
 class EpisodePlayerView: UIView {
   
-  static var shared: EpisodePlayerView = {
+  static func newView() -> EpisodePlayerView {
     Bundle.main.loadNibNamed("EpisodePlayerView", owner: nil, options: nil)?.first as! EpisodePlayerView
-  }()
+  }
   
   private let episodePlayer: AVPlayer = {
     let player = AVPlayer()

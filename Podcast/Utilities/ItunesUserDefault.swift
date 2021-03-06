@@ -10,6 +10,11 @@ import Foundation
 
 struct ItunesUserDefault {
   
+  enum Key {
+    static let podcasts = "PodcastsKey"
+    static let episodes = "EpisodesKey"
+  }
+  
   static var shared = ItunesUserDefault()
   
   private(set) var savedPodcasts: [Podcast]! {
@@ -24,6 +29,9 @@ struct ItunesUserDefault {
     self.savedEpisodes = fetchEpisodes()
     self.cleanUncommitedEpisodes()
   }
+  
+  
+  // MARK: - Podcast
   
   func contains(podcast: Podcast) -> Bool {
     return savedPodcasts.contains {
@@ -44,14 +52,14 @@ struct ItunesUserDefault {
   func savePodcasts() {
     do {
       let data = try NSKeyedArchiver.archivedData(withRootObject: savedPodcasts!, requiringSecureCoding: false)
-      UserDefaults.standard.set(data, forKey: UserDefaultsKey.podcasts)
+      UserDefaults.standard.set(data, forKey: Key.podcasts)
     } catch {
       print("encode podcasts error: \(error)")
     }
   }
   
   func fetchPodcasts() -> [Podcast]? {
-    guard let data = UserDefaults.standard.object(forKey: UserDefaultsKey.podcasts) as? Data else { return [] }
+    guard let data = UserDefaults.standard.object(forKey: Key.podcasts) as? Data else { return [] }
     do {
       let podcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Podcast]
       return podcasts
@@ -60,6 +68,9 @@ struct ItunesUserDefault {
       return nil
     }
   }
+  
+  
+  // MARK: - Episode
   
   func contains(episode: Episode) -> Bool {
     return index(of: episode) != nil
@@ -108,14 +119,14 @@ struct ItunesUserDefault {
   func saveEpisodes() {
     do {
       let data = try JSONEncoder().encode(savedEpisodes)
-      UserDefaults.standard.set(data, forKey: UserDefaultsKey.episodes)
+      UserDefaults.standard.set(data, forKey: Key.episodes)
     } catch {
       print("encode episodes error: \(error)")
     }
   }
   
   func fetchEpisodes() -> [Episode]? {
-    guard let data = UserDefaults.standard.object(forKey: UserDefaultsKey.episodes) as? Data else { return [] }
+    guard let data = UserDefaults.standard.object(forKey: Key.episodes) as? Data else { return [] }
     do {
       let episodes = try JSONDecoder().decode([Episode].self, from: data)
       return episodes

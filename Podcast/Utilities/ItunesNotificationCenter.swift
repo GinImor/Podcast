@@ -10,6 +10,9 @@ import Foundation
 
 extension Notification.Name {
   static let didUpdateProgress = Notification.Name(rawValue: "didUpdateProgress")
+  static let didSelectEpisode = Notification.Name(rawValue: "didSelectEpisode")
+  static let favoritePodcastsDidChange = Notification.Name("favoritePodcastsDidChange")
+  static let downloadEpisodesDidChange = Notification.Name("downloadEpisodesDidChange")
 }
 
 struct ItunesNotificationCenter {
@@ -38,11 +41,6 @@ struct ItunesNotificationCenter {
     NotificationCenter.default.post(name: .didSelectEpisode, object: nil, userInfo: userInfo)
   }
   
-  func postForDidUpdateProgress(_ progress: Progress, for episode: Episode) {
-    let userInfo: [String: Any] = [Key.progress: progress, Key.episode: episode]
-    nc.post(name: .didUpdateProgress, object: nil, userInfo: userInfo)
-  }
-  
   func observeForDidUpdateProgress(completion: @escaping (Progress, Episode) -> Void) {
     nc.addObserver(forName: .didUpdateProgress, object: nil, queue: nil) { (notification) in
       guard let userInfo = notification.userInfo,
@@ -50,6 +48,11 @@ struct ItunesNotificationCenter {
         let episode = userInfo[Key.episode] as? Episode else { return }
       completion(progress, episode)
     }
+  }
+  
+  func postForDidUpdateProgress(_ progress: Progress, for episode: Episode) {
+    let userInfo: [String: Any] = [Key.progress: progress, Key.episode: episode]
+    nc.post(name: .didUpdateProgress, object: nil, userInfo: userInfo)
   }
   
 }

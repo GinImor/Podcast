@@ -10,8 +10,13 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
   
-  let episodePlayerView = EpisodePlayerView.shared
+  let episodePlayerView = EpisodePlayerView.newView()
   var playerViewTopToSuperViewBottomConstraint: NSLayoutConstraint!
+  
+  var isMiniPlayerView = false
+  var topConstant: CGFloat { -view.frame.height }
+  var lowConstant: CGFloat { -(tabBar.frame.height+64)}
+  var initialConstantY: CGFloat { isMiniPlayerView ? lowConstant : topConstant }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -79,11 +84,6 @@ class MainTabBarController: UITabBarController {
       self.expandPlayerViewToTop()
     }
   }
-  
-  var isMiniPlayerView = false
-  var topConstant: CGFloat { -view.frame.height }
-  var lowConstant: CGFloat { -(tabBar.frame.height+64)}
-  var initialConstantY: CGFloat { isMiniPlayerView ? lowConstant : topConstant }
   
   @objc func handlePan(_ pan: UIPanGestureRecognizer) {
     let translationY = pan.translation(in: self.view).y
