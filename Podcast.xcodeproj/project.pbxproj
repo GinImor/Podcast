@@ -16,6 +16,7 @@
 		DC4E913725D8CFF600B6EB85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913525D8CFF600B6EB85 /* Main.storyboard */; };
 		DC4E913925D8CFF800B6EB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913825D8CFF800B6EB85 /* Assets.xcassets */; };
 		DC4E913C25D8CFF800B6EB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4E913A25D8CFF800B6EB85 /* LaunchScreen.storyboard */; };
+		DC5F42D025F3300D00F3B0BC /* ItunesFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F42CF25F3300D00F3B0BC /* ItunesFileManager.swift */; };
 		DC60B85D25DF5E5E005F07BE /* UIView+onesideBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */; };
 		DC60BE3B25E35CB3001EF9A4 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3A25E35CB3001EF9A4 /* FavoritesController.swift */; };
 		DC60BE3D25E35D5E001EF9A4 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60BE3C25E35D5D001EF9A4 /* CellID.swift */; };
@@ -61,6 +62,7 @@
 		DC4E913825D8CFF800B6EB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC4E913B25D8CFF800B6EB85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC4E913D25D8CFF800B6EB85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC5F42CF25F3300D00F3B0BC /* ItunesFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesFileManager.swift; sourceTree = "<group>"; };
 		DC60B85C25DF5E5E005F07BE /* UIView+onesideBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+onesideBorder.swift"; sourceTree = "<group>"; };
 		DC60BE3A25E35CB3001EF9A4 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		DC60BE3C25E35D5D001EF9A4 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				DCDCF1C625DA7ADE007D7BFC /* ItunesService.swift */,
 				DC32F38D25EF266C007621D4 /* ItunesUserDefault.swift */,
 				DC6A8E9225F0C71700394FE6 /* ItunesNotificationCenter.swift */,
+				DC5F42CF25F3300D00F3B0BC /* ItunesFileManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				DCA73FC425DC9FA9008B64D4 /* String+httpTransformToHttps.swift in Sources */,
 				DCBA719B25DBFD82004E081C /* DateFormatter+customInstance.swift in Sources */,
 				DCDCF1C725DA7ADE007D7BFC /* ItunesService.swift in Sources */,
+				DC5F42D025F3300D00F3B0BC /* ItunesFileManager.swift in Sources */,
 				DCE22E6C25E696AF00A0B92C /* UIView+cornerRadius.swift in Sources */,
 				DCDCF1D025DABFEA007D7BFC /* Episode.swift in Sources */,
 				DC70CE0D25D9219E00F2C169 /* PodcastSearchController.swift in Sources */,

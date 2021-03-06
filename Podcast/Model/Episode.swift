@@ -17,6 +17,7 @@ struct Episode: Equatable, Codable {
   let imageUrl: String
   let streamUrl: String
   var fileName: String?
+  var commited = false
   
   init(rssFeedItem: RSSFeedItem, altImageUrl: String) {
     title = rssFeedItem.title

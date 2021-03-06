@@ -36,7 +36,7 @@ class DownloadsController: UITableViewController {
       self.needToReload = true
     }
     ItunesNotificationCenter.default.observeForDidUpdateProgress { (progress, episode) in
-      guard let index = self.downloads.firstIndex(of: episode) else { return }
+      guard let index = ItunesUserDefault.shared.index(of: episode) else { return }
       
       let indexPath = IndexPath(row: self.rowFor(indexPathRow: index), section: 0)
       guard let cell = self.tableView.cellForRow(at: indexPath) as? EpisodeCell else { return }
@@ -48,6 +48,7 @@ class DownloadsController: UITableViewController {
       }
       if progress.fractionCompleted == 1.0 {
         cell.progressView.isHidden = true
+        ItunesUserDefault.shared.commitEpisode(episode)
       }
     }
   }

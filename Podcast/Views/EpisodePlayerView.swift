@@ -304,10 +304,9 @@ class EpisodePlayerView: UIView {
   /// initial play
   private func playEpisode(_ episode: Episode) {
     let playUrl: URL
-    if let fileName = episode.fileName,
-      let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    if let fileURL = ItunesFileManager.default.fileURLForName(episode.fileName)
     {
-      playUrl = documentURL.appendingPathComponent(fileName)
+      playUrl = fileURL
       print("playing offline, playURL: \(playUrl)")
     } else {
       playUrl = URL(string: episode.streamUrl) ?? URL(string: "")!

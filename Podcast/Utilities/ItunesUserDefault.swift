@@ -22,6 +22,7 @@ struct ItunesUserDefault {
   init() {
     self.savedPodcasts = fetchPodcasts()
     self.savedEpisodes = fetchEpisodes()
+    self.cleanUncommitedEpisodes()
   }
   
   func contains(podcast: Podcast) -> Bool {
@@ -61,7 +62,11 @@ struct ItunesUserDefault {
   }
   
   func contains(episode: Episode) -> Bool {
-    return savedEpisodes.contains {
+    return index(of: episode) != nil
+  }
+  
+  func index(of episode: Episode) -> Int? {
+    return savedEpisodes.firstIndex {
       $0.title == episode.title && $0.author == episode.author
     }
   }
@@ -75,11 +80,29 @@ struct ItunesUserDefault {
   mutating func deleteEpisode(_ episode: Episode) {
     guard savedEpisodes != nil else { return }
     savedEpisodes.removeAll { $0.title == episode.title && $0.author == episode.author }
+    ItunesFileManager.default.deleteEpisode(episode)
+  }
+  
+  mutating func deleteEpisodes(_ episodes: [Episode]) {
+    for episode in episodes {
+      deleteEpisode(episode)
+    }
   }
   
   mutating func updateEpisode(_ oldEpisode: Episode, with newEpisode: Episode) {
-    guard savedEpisodes != nil, let index = savedEpisodes.firstIndex(of: oldEpisode) else { return }
+    guard savedEpisodes != nil, let index = index(of: oldEpisode) else { return }
     savedEpisodes[index] = newEpisode
+  }
+  
+  mutating func commitEpisode(_ episode: Episode) {
+    guard savedEpisodes != nil, let index = index(of: episode) else { return }
+    savedEpisodes[index].commited = true
+  }
+  
+  mutating func cleanUncommitedEpisodes() {
+    guard savedEpisodes != nil else { return }
+    let uncommitedEpisodes = savedEpisodes.filter { !$0.commited }
+    deleteEpisodes(uncommitedEpisodes)
   }
   
   func saveEpisodes() {
@@ -94,8 +117,8 @@ struct ItunesUserDefault {
   func fetchEpisodes() -> [Episode]? {
     guard let data = UserDefaults.standard.object(forKey: UserDefaultsKey.episodes) as? Data else { return [] }
     do {
-      let Episodes = try JSONDecoder().decode([Episode].self, from: data)
-      return Episodes
+      let episodes = try JSONDecoder().decode([Episode].self, from: data)
+      return episodes
     } catch {
       print("decode episodes error: \(error)")
       return nil
